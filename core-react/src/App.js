@@ -3,21 +3,28 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const Person = {
+    name: 'Sajeeb Ahamed',
+    age: 19,
+    designation: 'Frontend Developer'
+  }
+  const ulStyle = {
+    color: 'yellow',
+    fontSize: '2rem'
+  }
+  console.log(Person);
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
+        <p style={{fontSize:'4rem'}}>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <ul style={ulStyle}>
+          <li> {Person.name} </li>
+          <li> {Person.age} </li>
+          <li> {Person.designation} </li>
+        </ul>
       </header>
     </div>
   );
