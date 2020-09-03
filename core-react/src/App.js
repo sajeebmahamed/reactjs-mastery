@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
   const Person = {
@@ -34,6 +35,7 @@ function App() {
       <PersonCom person="Sajeeb" to="Alex"></PersonCom>
       <PersonCom person="Santos" to="Pique"></PersonCom>
       <AdobePricing products={products} ></AdobePricing>
+      <Counter></Counter>
 
     </div>
   );
@@ -73,6 +75,16 @@ function AdobePricing(props) {
     //     <h1> Name: {name} </h1>
     //     <p> Price: {Price} </p>
     // </div>
+  )
+  
+}
+
+function Counter() {
+  const [count, setCount] = useState(10)
+  return (
+    <div>
+      <h1> Count : {count} </h1>
+    </div>
   )
 }
 export default App;
