@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 function App() {
   const Person = {
@@ -32,6 +33,7 @@ function App() {
           <li> {Person.designation} </li>
         </ul>
       </header>
+      <Users></Users>
       <PersonCom person="Sajeeb" to="Alex"></PersonCom>
       <PersonCom person="Santos" to="Pique"></PersonCom>
       <AdobePricing products={products} ></AdobePricing>
@@ -88,6 +90,41 @@ function Counter() {
       <h1> Count : {count} </h1>
       <button onMouseOver={() => setCount(count-1)}>-</button>
       <button onClick={() => setCount(count+1)}>+</button>
+    </div>
+  )
+}
+
+function Users() {
+  const [users, setUsers] = useState([])
+  console.log("users data", users);
+
+  //  useEffect(() => {
+  //    async function userData() {
+  //      const res = await fetch('https://jsonplaceholder.typicode.com/users')
+  //      const data = await res.json()
+  //      setUsers(data)
+  //    }
+  //    userData()
+  // }, [])
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(res => res.json())
+    .then(data => setUsers(data))
+  }, [])
+  const uStyle = {
+    border: '1px solid red',
+    padding: '1rem 0'
+  }
+  return (
+    <div>
+      <ul>
+        {
+           users.map(user => <div key={user.id} style={uStyle}>
+             <li> {user.name} </li>
+             <li> {user.email} </li>
+           </div>)
+        }
+      </ul>
     </div>
   )
 }
