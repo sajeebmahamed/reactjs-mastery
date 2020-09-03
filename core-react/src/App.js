@@ -81,9 +81,13 @@ function AdobePricing(props) {
 
 function Counter() {
   const [count, setCount] = useState(10)
+  // const handleDecrease = () => setCount(count - 1)
+  // const handleIncrease = () => setCount(count + 1)
   return (
     <div>
       <h1> Count : {count} </h1>
+      <button onMouseOver={() => setCount(count-1)}>-</button>
+      <button onClick={() => setCount(count+1)}>+</button>
     </div>
   )
 }
