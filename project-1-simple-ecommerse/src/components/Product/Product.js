@@ -2,7 +2,6 @@ import React from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 
 const Product = (props) => {
-    console.log(props);
     const {name, price, img, stock, seller} = props.product
     return(
         <Container>
