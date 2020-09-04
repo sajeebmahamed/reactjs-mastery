@@ -1,0 +1,22 @@
+$nav-color: #2d2d2d;
+#header {
+    img {
+        width: 30%;
+        margin: 0px auto;
+        display: block;
+    }
+    .menus {
+        background-color: $nav-color;
+        height: 3rem;
+        a {
+            color: #fff;
+            padding: 0.5rem 2rem;
+            margin: 0 auto;
+            text-decoration: none;
+
+            &:hover {
+                background-color: red;
+            }
+        }
+    }
+}
