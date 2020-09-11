@@ -1,6 +1,6 @@
 import React, { createFactory, useEffect, useState } from 'react';
 import fakeData from '../../fakeData';
-import { getDatabaseCart } from '../../utilities/databaseManager';
+import { getDatabaseCart, removeFromDatabaseCart } from '../../utilities/databaseManager';
 import ReviewItem from '../ReviewItem/ReviewItem';
 
 const Review = () => {
@@ -21,6 +21,7 @@ const Review = () => {
     const handleRemoveCart = (productKey) => {
         const newCart = cart.filter(pd => pd.key !== productKey)
         setCart(newCart)
+        removeFromDatabaseCart(productKey)
     }
 
     return (
