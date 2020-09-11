@@ -6,8 +6,9 @@ const ReviewItem = (props) => {
         <Container>
             <Row>
                 <Col>
-                    <h4> Name : {props.product.name} </h4>
-                    <h4> Quantity : {props.product.quantity} </h4>
+                    <h6> Name : {props.product.name} </h6>
+                    <p> Quantity : {props.product.quantity} </p>
+                    <p> Price: {props.product.price} </p>
                     <button onClick={() => props.handleRemoveCart(props.product.key)}>Remove Item</button>
                 </Col>
             </Row>

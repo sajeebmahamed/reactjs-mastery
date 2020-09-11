@@ -1,8 +1,9 @@
 import React from 'react'
-import { Container, Col, Row, Toast } from 'react-bootstrap'
+import { Container, Col, Row, Toast, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 const Cart = (props) => {
     const cart = props.cart
-    const total = cart.reduce((total, product) => total + product.price , 0)
+    const total = cart.reduce((total, product) => total + product.price * product.quantity , 0)
     let shippingCost = 0
     if(total > 30) {
         shippingCost = 0
@@ -28,6 +29,9 @@ const Cart = (props) => {
                     <p> Shipping Cost <strong> {shippingCost} </strong> </p>
                     <p> Tax <strong> {formatNum(tax)} </strong> </p>
                     <p> Total <strong> {formatNum(total + shippingCost + tax)} </strong> </p>
+                    {
+                        props.children
+                    }
                 </Col>
             </Row>
         </Container>

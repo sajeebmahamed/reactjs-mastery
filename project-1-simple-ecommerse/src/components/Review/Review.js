@@ -1,10 +1,13 @@
 import React, { createFactory, useEffect, useState } from 'react';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 import fakeData from '../../fakeData';
-import { getDatabaseCart, removeFromDatabaseCart } from '../../utilities/databaseManager';
+import { getDatabaseCart, processOrder, removeFromDatabaseCart } from '../../utilities/databaseManager';
+import Cart from '../Cart/Cart';
 import ReviewItem from '../ReviewItem/ReviewItem';
 
 const Review = () => {
     const [cart, setCart] = useState([])
+    const [orderPlaced, setOrderPlaced] = useState(false)
 
     useEffect(() => {
         const savedCart = getDatabaseCart()
@@ -23,19 +26,36 @@ const Review = () => {
         setCart(newCart)
         removeFromDatabaseCart(productKey)
     }
+    const handlePlaceOrder = () => {
+        setCart([])
+        processOrder()
+        setOrderPlaced(true)
+    }
 
     return (
-        <div>
-            
-            {
-                cart.map(pd => <ReviewItem
-                                    key={pd.key}
-                                    product={pd}
-                                    handleRemoveCart={handleRemoveCart}
-                                >
-                                </ReviewItem>)
-            }
-        </div>
+        <Container>
+            <Row>
+                <Col md={8}>
+                    {
+                        cart.map(pd => <ReviewItem
+                            key={pd.key}
+                            product={pd}
+                            handleRemoveCart={handleRemoveCart}
+                        >
+                        </ReviewItem>)
+                    }
+                    {
+                        orderPlaced && <h1>Thank You for your order</h1>
+                    }
+                </Col>
+                <Col md={4}>
+                    <Cart cart={cart}>
+                        <Button onClick={handlePlaceOrder}>Place Order</Button>
+                    </Cart>
+                </Col>
+            </Row>
+        </Container>
+        
     );
 };
 
