@@ -2,6 +2,7 @@ import React from 'react'
 import {Container, Row, Col, Nav} from 'react-bootstrap'
 import logo from '../../images/logo.png'
 import './Header.scss'
+import { Link } from 'react-router-dom'
 const Header = () => {
     return (
         <Container id="header">
@@ -13,9 +14,21 @@ const Header = () => {
             <Row>
                 <Col md= {12}>
                     <Nav className="menus">
-                        <a href=""> Shop </a>
-                        <a href=""> Order Reivew </a>
-                        <a href=""> Manage Inventory </a>
+                        <a>
+                            <Link to="/">
+                                Shop
+                            </Link>
+                        </a>
+                        <a >  
+                            <Link to="/review">
+                                Order Reivew
+                            </Link>
+                        </a>
+                        <a> 
+                            <Link to="/inventory">
+                                Manage Inventory
+                            </Link>
+                        </a>
                     </Nav>
                 </Col>
             </Row>
