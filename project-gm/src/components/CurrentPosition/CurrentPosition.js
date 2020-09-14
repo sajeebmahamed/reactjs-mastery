@@ -52,7 +52,6 @@ const CurrentPosition = () => {
                             onSelect(currentPosition)
                         }}
                     >
-
                         {
                             (pop.lat & pop.lng) &&
                             (
