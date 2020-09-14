@@ -1,0 +1,20 @@
+.userInfo input,
+select {
+    display: block;
+    padding: 10px 20px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 100%;
+
+}
+
+.userInfo input[type=submit] {
+    width: 100%;
+    color: #fff;
+    padding: 10px 22px;
+    border: 2px solid #2d2d2d;
+    background-color: #F6921E;
+    border-radius: 4px;
+    cursor: pointer;
+
+}
