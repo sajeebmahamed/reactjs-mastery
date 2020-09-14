@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { GoogleMap, InfoWindow, LoadScript, Marker } from '@react-google-maps/api';
 import { useForm } from 'react-hook-form';
 import './CurrentPosition.css'
-require('dotenv').config()
+
 
 const CurrentPosition = () => {
     const { register, handleSubmit, errors } = useForm();
