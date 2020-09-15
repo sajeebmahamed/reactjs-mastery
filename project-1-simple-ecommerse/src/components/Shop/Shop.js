@@ -16,11 +16,6 @@ const Shop = () => {
     // console.log(keyWord);
 
     const handleAddProduct = (product) => {
-        // const newCart = [...cart, product]
-        // setCart(newCart)
-        // const sameProduct = newCart.filter(pd=> pd.key === product.key)
-        // const count = sameProduct.length
-        // addToDatabaseCart(product.key, count)
         const addedKey = product.key;
         const sameProduct = cart.find(pd => pd.key === addedKey);
         let count = 1;

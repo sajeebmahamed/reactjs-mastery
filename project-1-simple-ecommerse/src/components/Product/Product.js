@@ -3,7 +3,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 const Product = (props) => {
-    console.log(props);
+    // console.log(props);
     const {name, price, img, stock, seller, key} = props.product
     return(
         <Container>
