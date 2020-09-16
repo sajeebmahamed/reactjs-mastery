@@ -5,6 +5,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import Cart from '../Cart/Cart'
 import { addToDatabaseCart, getDatabaseCart } from '../../utilities/databaseManager'
 import { Link } from 'react-router-dom'
+import './Shop.scss'
 
 const Shop = () => {
     const data = fakeData.slice(0, 10)
@@ -13,7 +14,11 @@ const Shop = () => {
     const [cart, setCart] = useState([])
 
     const [keyWord, setKeyword] = useState([])
-    // console.log(keyWord);
+    
+    useEffect(() => {
+        const result = data.filter(product => product.name.toLowerCase().includes(keyWord))  
+        setProduct(result) 
+    }, [keyWord])
 
     const handleAddProduct = (product) => {
         const addedKey = product.key;
@@ -50,8 +55,8 @@ const Shop = () => {
     }
 
     return (
-        <Container>
-            <input onChange={handleSearchReult} placeholder="Search Product" />
+        <Container id="shop">
+            <input className="form-control" onChange={handleSearchReult} placeholder="Search Product" />
             <Row>
                 <Col md={8}>
                     {
