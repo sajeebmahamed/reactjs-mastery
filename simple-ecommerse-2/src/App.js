@@ -44,12 +44,15 @@ function App() {
     })
     // setCartItems([...cartItems, item])
   }
+  const removeCartItems = (id) => {
+    setCartItems((items) => items.filter((item) => item.id !== id))
+  }
 
   return (
     <div>
       <Navbar setKeyword={setKeyword}></Navbar>
       <ProductList products={products} addCartItem={addCartItem}></ProductList>
-      <Cart cartItems={cartItems}></Cart>
+      <Cart cartItems={cartItems} removeCartItems={removeCartItems}></Cart>
     </div>
   );
 }

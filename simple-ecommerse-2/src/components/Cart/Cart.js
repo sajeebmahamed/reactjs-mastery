@@ -1,9 +1,9 @@
 import React from 'react';
 
-const CartItems = ({ title, price, quantity}) => {
+const CartItems = ({id,title, price, quantity, removeCartItems}) => {
     return(
         <div className="cart-item">
-            <button>x</button>
+            <button onClick={() => removeCartItems(id)}>x</button>
             <div className="info">
                 <span> {title} X {quantity} </span>
                 <span> {price} </span>
@@ -12,7 +12,7 @@ const CartItems = ({ title, price, quantity}) => {
     )
 }
 
-const Cart = ({cartItems}) => {
+const Cart = ({ cartItems, removeCartItems}) => {
     const total = cartItems.reduce((sum,cur) => sum + cur.price, 0)
     return (
         (<div className="cart">
@@ -20,7 +20,7 @@ const Cart = ({cartItems}) => {
             <div className="cart-items">
                 {
                     cartItems.map(item => (
-                        <CartItems {...item}></CartItems>
+                        <CartItems {...item} removeCartItems={removeCartItems}></CartItems>
                     ))
                 }
                 <div className="cart-item">
