@@ -9,19 +9,47 @@ import data from './data'
 function App() {
 
   const [products, setProducts] = useState([...data])
+  const [cartItems, setCartItems] = useState([])
   const [keyword, setKeyword] = useState("")
-  console.log(keyword);
+  console.log(cartItems);
 
   useEffect(() => {
     const results = data.filter(product => product.title.toLowerCase().includes(keyword.toLowerCase()))
     setProducts(results)
-  },[keyword])
+  }, [keyword])
+
+  const addCartItem = (id) => {
+    const item = products.find(product => product.id === id)
+    setCartItems(items => {
+      const itemIndex = items.findIndex(currentItem => currentItem.id === id)
+      if(itemIndex === -1) {
+        return [
+          ...items,
+          {
+            ...item, 
+            quantity: 1
+          }
+        ];
+      } else {
+        return items.map(currentItem => 
+          currentItem.id === id
+           ? {
+            ...item,
+            quantity: parseInt(item.quantity + 1)
+        }
+        : currentItem
+        
+        );
+      }
+    })
+    // setCartItems([...cartItems, item])
+  }
 
   return (
     <div>
-      <Navbar setKeyword= {setKeyword}></Navbar>
-      <ProductList products={products}></ProductList>
-      <Cart></Cart>
+      <Navbar setKeyword={setKeyword}></Navbar>
+      <ProductList products={products} addCartItem={addCartItem}></ProductList>
+      <Cart cartItems={cartItems}></Cart>
     </div>
   );
 }

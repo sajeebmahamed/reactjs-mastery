@@ -109,7 +109,9 @@
   border: 1px solid grey;
   height: 100vh;
   position: sticky;
-  top: 50px;
+  float: right;
+  bottom: 1%;
+  background-color: rgb(176, 176, 176, 0.7);
 }
 
 .cart.dark {
