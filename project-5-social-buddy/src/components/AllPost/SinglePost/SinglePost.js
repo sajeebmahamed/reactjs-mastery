@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import { Avatar, Button, Card, CardActions, CardContent, CardHeader, Container, CssBaseline, fade, Grid, IconButton, makeStyles, Paper, Typography } from '@material-ui/core';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { UserContext } from '../../../App';
+import { css } from "@emotion/core";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const singlePostStyle = makeStyles((theme) => ({
     root: {
@@ -79,17 +80,31 @@ const SinglePost = () => {
             setSinglePost(data)
         }
         postSingle()
-    })
+    }, [])
     const history = useHistory()
     const handleComment = (id) => {
         history.push(`/comments/${id}`)
     }
+    const override = css`
+        display: block;
+        margin: 0 auto;
+        border-color: red;
+        `;
     return (
         <>
             <CssBaseline/>
             <Container maxWidth="md" component="main">
                 <Grid container spacing={3}>
-                    {
+                    {singleUser.length === 0 && SinglePost === 0 ? 
+                        <div className="sweet-loading">
+                            <ClipLoader
+                                css={override}
+                                size={150}
+                                color={"#123abc"}
+                                loading={this.state.loading}
+                            />
+                        </div>
+                        :
                         <Grid item xs={12} md={12}>
                         <Paper className={classes.paper}>
                             <Card className={classes.root}>
@@ -118,6 +133,9 @@ const SinglePost = () => {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
+                                    <Typography>
+                                        Comments
+                                    </Typography>
                                     {/* <Button onClick={() => handleClick(singleUser.id)} size="small">Read More</Button> */}
                                         <Button style={{visibility:'hidden'}} onClick={() => handleComment(singlePost.id)} size="small">
                                             Show Comments
