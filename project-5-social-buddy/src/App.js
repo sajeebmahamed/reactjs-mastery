@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import AllPost from './components/AllPost/AllPost';
 import SinglePost from './components/AllPost/SinglePost/SinglePost';
+import Comments from './components/Comments/Comments';
 
 export const UserContext = createContext()
 
@@ -43,6 +44,9 @@ function App() {
           </Route>
           <Route path="/user/:id">
             <SinglePost></SinglePost>
+            <Comments></Comments>
+          </Route>
+          <Route path="/comments/:id">
           </Route>
         </Switch>
       </UserContext.Provider>

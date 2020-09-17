@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Avatar, Button, Card, CardActions, CardContent, CardHeader, Container, CssBaseline, fade, Grid, IconButton, makeStyles, Paper, Typography } from '@material-ui/core';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { UserContext } from '../../../App';
 
@@ -79,7 +79,11 @@ const SinglePost = () => {
             setSinglePost(data)
         }
         postSingle()
-    }, [])
+    })
+    const history = useHistory()
+    const handleComment = (id) => {
+        history.push(`/comments/${id}`)
+    }
     return (
         <>
             <CssBaseline/>
@@ -115,7 +119,7 @@ const SinglePost = () => {
                                 </CardContent>
                                 <CardActions>
                                     {/* <Button onClick={() => handleClick(singleUser.id)} size="small">Read More</Button> */}
-                                    <Button size="small">
+                                        <Button style={{visibility:'hidden'}} onClick={() => handleComment(singlePost.id)} size="small">
                                             Show Comments
                                     </Button>
                                 </CardActions>
@@ -128,5 +132,6 @@ const SinglePost = () => {
         </>
     );
 };
+
 
 export default SinglePost;
