@@ -4,6 +4,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { UserContext } from '../../App';
+import { Link } from 'react-router-dom';
 
 const allPostStyle = makeStyles((theme) => ({
     root: {
@@ -65,7 +66,10 @@ const allPostStyle = makeStyles((theme) => ({
 const AllPost = () => {
     const classes = allPostStyle()
     const users = useContext(UserContext)
-    console.log(users);
+    // console.log(users);
+    // const handleClick = (id) => {
+    //     console.log('clicked hyse', id);
+    // }
     return (
         <>
             <CssBaseline />
@@ -105,15 +109,15 @@ const AllPost = () => {
                         users[0].map(singleUser => (
                             users[1].map(userPost => (
                                 <>
-                                    { singleUser.id === userPost.id &&
+                                    {singleUser.id === userPost.id &&
                                         <Grid item xs={12} md={4}>
                                             <Paper className={classes.paper}>
                                                 <Card className={classes.root}>
                                                     <CardHeader
                                                         avatar={
                                                             <Avatar aria-label="recipe" className={classes.avatar}>
-                                                                R
-                                                             </Avatar>
+                                                                {/* <img src={photos.picture.large} alt=""/> */}
+                                                            </Avatar>
                                                         }
                                                         action={
                                                             <IconButton aria-label="settings">
@@ -122,19 +126,24 @@ const AllPost = () => {
                                                         }
                                                         title={singleUser.name}
                                                         subheader={singleUser.email}
-                                                        />
-                                                        
+                                                    />
+
                                                     <CardContent>
                                                         <Typography variant="h6" component="h2">
-                                                        {userPost.title}
+                                                            {userPost.title}
                                                         </Typography>
-                                                        <Typography variant="body2" component="p">
+                                                        {/* <Typography variant="body2" component="p">
                                                            {userPost.body}
                                                             <br />
-                                                        </Typography>
+                                                        </Typography> */}
                                                     </CardContent>
                                                     <CardActions>
-                                                        <Button size="small">Learn More</Button>
+                                                        {/* <Button onClick={() => handleClick(singleUser.id)} size="small">Read More</Button> */}
+                                                        <Button size="small">
+                                                        <Link to= {`/user/${singleUser.id}`}>
+                                                                Read More
+                                                            </Link>
+                                                        </Button>
                                                     </CardActions>
                                                 </Card>
                                             </Paper>
