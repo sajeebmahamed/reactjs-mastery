@@ -1,11 +1,33 @@
-import React from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import AllPost from './components/AllPost/AllPost';
 
+export const UserContext = createContext()
+
 function App() {
+  const [users, setUsers] = useState([])
+  const [usersPost, setUsersPost] = useState([])
+  
+  // console.log(usersPost);
+  useEffect(() => {
+    async function Users() {
+      const res = await fetch('https://jsonplaceholder.typicode.com/users')
+      const data = await res.json()
+      setUsers(data)
+    }
+    Users()
+    async function UsersPost() {
+      const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+      const data = await res.json()
+      setUsersPost(data)
+    }
+    UsersPost()
+  }, [])
+
+
   return (
-    <div>
+    <UserContext.Provider value={[users, usersPost]}>
         <AllPost></AllPost>
-    </div>
+    </UserContext.Provider>
   );
 }
 

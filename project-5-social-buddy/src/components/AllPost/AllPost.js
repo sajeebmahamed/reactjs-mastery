@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { AppBar, Avatar, Button, Card, CardActions, CardContent, CardHeader, Container, CssBaseline, fade, Grid, IconButton, InputBase, makeStyles, Paper, Toolbar, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { UserContext } from '../../App';
 
 const allPostStyle = makeStyles((theme) => ({
     root: {
@@ -63,6 +64,8 @@ const allPostStyle = makeStyles((theme) => ({
 
 const AllPost = () => {
     const classes = allPostStyle()
+    const users = useContext(UserContext)
+    console.log(users);
     return (
         <>
             <CssBaseline />
@@ -98,45 +101,49 @@ const AllPost = () => {
             </AppBar>
             <Container maxWidth="md" component="main">
                 <Grid container spacing={3}>
-                    <Grid item xs={12} md={4}>
-                        <Paper className={classes.paper}>
-                            <Card className={classes.root}>
-                                <CardHeader
-                                    avatar={
-                                        <Avatar aria-label="recipe" className={classes.avatar}>
-                                            R
-                                        </Avatar>
+                    {
+                        users[0].map(singleUser => (
+                            users[1].map(userPost => (
+                                <>
+                                    { singleUser.id === userPost.id &&
+                                        <Grid item xs={12} md={4}>
+                                            <Paper className={classes.paper}>
+                                                <Card className={classes.root}>
+                                                    <CardHeader
+                                                        avatar={
+                                                            <Avatar aria-label="recipe" className={classes.avatar}>
+                                                                R
+                                                             </Avatar>
+                                                        }
+                                                        action={
+                                                            <IconButton aria-label="settings">
+                                                                <MoreVertIcon />
+                                                            </IconButton>
+                                                        }
+                                                        title={singleUser.name}
+                                                        subheader={singleUser.email}
+                                                        />
+                                                        
+                                                    <CardContent>
+                                                        <Typography variant="h6" component="h2">
+                                                        {userPost.title}
+                                                        </Typography>
+                                                        <Typography variant="body2" component="p">
+                                                           {userPost.body}
+                                                            <br />
+                                                        </Typography>
+                                                    </CardContent>
+                                                    <CardActions>
+                                                        <Button size="small">Learn More</Button>
+                                                    </CardActions>
+                                                </Card>
+                                            </Paper>
+                                        </Grid>
                                     }
-                                    action={
-                                        <IconButton aria-label="settings">
-                                            <MoreVertIcon />
-                                        </IconButton>
-                                    }
-                                    title="Shrimp and Chorizo Paella"
-                                    subheader="September 14, 2016"
-                                />
-                                <CardContent>
-                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                        Word of the Day
-                                    </Typography>
-                                    <Typography variant="h5" component="h2">
-                                        Hello
-                                    </Typography>
-                                    <Typography className={classes.pos} color="textSecondary">
-                                        adjective
-                                    </Typography>
-                                    <Typography variant="body2" component="p">
-                                        well meaning and kindly.
-                                    <br />
-                                        {'"a benevolent smile"'}
-                                    </Typography>
-                                </CardContent>
-                                <CardActions>
-                                    <Button size="small">Learn More</Button>
-                                </CardActions>
-                            </Card>
-                        </Paper>
-                    </Grid>
+                                </>
+                            ))
+                        ))
+                    }
                 </Grid>
 
                 
