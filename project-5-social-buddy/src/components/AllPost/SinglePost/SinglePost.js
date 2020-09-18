@@ -1,9 +1,9 @@
-import React, {useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Avatar, Button, Card, CardActions, CardContent, CardHeader, Container, CssBaseline, fade, Grid, IconButton, makeStyles, Paper, Typography } from '@material-ui/core';
 import { useHistory, useParams } from 'react-router-dom';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { css } from "@emotion/core";
-import ClipLoader from "react-spinners/ClipLoader";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import Loader from 'react-loader-spinner';
 
 const singlePostStyle = makeStyles((theme) => ({
     root: {
@@ -60,9 +60,11 @@ const singlePostStyle = makeStyles((theme) => ({
     },
 }));
 
+
 const SinglePost = () => {
+
     const classes = singlePostStyle()
-    const {id} = useParams()
+    const { id } = useParams()
 
     const [singleUser, setSingleUser] = useState({})
     const [singlePost, setSinglePost] = useState({})
@@ -85,65 +87,62 @@ const SinglePost = () => {
     const handleComment = (id) => {
         history.push(`/comments/${id}`)
     }
-    const override = css`
-        display: block;
-        margin: 0 auto;
-        border-color: red;
-        `;
+
     return (
         <>
-            <CssBaseline/>
+
+            {/* <Loader
+                type="Puff"
+                color="#00BFFF"
+                height={100}
+                width={100}
+                timeout={3000} //3 secs
+
+            /> */}
+
+            <CssBaseline />
             <Container maxWidth="md" component="main">
                 <Grid container spacing={3}>
-                    {singleUser.length === 0 && SinglePost === 0 ? 
-                        <div className="sweet-loading">
-                            <ClipLoader
-                                css={override}
-                                size={150}
-                                color={"#123abc"}
-                                loading={this.state.loading}
-                            />
-                        </div>
-                        :
+                    {
                         <Grid item xs={12} md={12}>
-                        <Paper className={classes.paper}>
-                            <Card className={classes.root}>
-                                <CardHeader
-                                    avatar={
-                                        <Avatar aria-label="recipe" className={classes.avatar}>
-                                            {/* <img src={photos.picture.large} alt=""/> */}
-                                        </Avatar>
-                                    }
-                                    action={
-                                        <IconButton aria-label="settings">
-                                            <MoreVertIcon />
-                                        </IconButton>
-                                    }
+                            <Paper className={classes.paper}>
+                                <Card className={classes.root}>
+                                    <CardHeader
+                                        avatar={
+                                            <Avatar aria-label="recipe" className={classes.avatar}>
+                                                {/* <img src={photos.picture.large} alt=""/> */}
+                                            </Avatar>
+                                        }
+                                        action={
+                                            <IconButton aria-label="settings">
+                                                <MoreVertIcon />
+                                            </IconButton>
+                                        }
                                         title={singleUser.name}
                                         subheader={singleUser.email}
-                                />
+                                    />
 
-                                <CardContent>
-                                    <Typography variant="h6" component="h2">
+                                    <CardContent>
+                                        <Typography variant="h6" component="h2">
                                             {singlePost.title}
-                                    </Typography>
-                                    <Typography variant="body2" component="p">
+                                        </Typography>
+                                        <Typography variant="body2" component="p">
                                             {singlePost.body}
-                                        <br />
+                                            <br />
+                                        </Typography>
+                                    </CardContent>
+                                    <CardActions>
+                                        <Typography>
+                                            Comments
                                     </Typography>
-                                </CardContent>
-                                <CardActions>
-                                    <Typography>
-                                        Comments
-                                    </Typography>
-                                    {/* <Button onClick={() => handleClick(singleUser.id)} size="small">Read More</Button> */}
-                                        <Button style={{visibility:'hidden'}} onClick={() => handleComment(singlePost.id)} size="small">
+                                        {/* <Button onClick={() => handleClick(singleUser.id)} size="small">Read More</Button> */}
+                                        <Button style={{ visibility: 'hidden' }} onClick={() => handleComment(singlePost.id)} size="small">
                                             Show Comments
                                     </Button>
-                                </CardActions>
-                            </Card>
-                        </Paper>
-                    </Grid>
+                                    </CardActions>
+                                </Card>
+                            </Paper>
+                        </Grid>
                     }
                 </Grid>
             </Container>

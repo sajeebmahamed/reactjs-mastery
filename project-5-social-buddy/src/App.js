@@ -8,6 +8,7 @@ import {
 import AllPost from './components/AllPost/AllPost';
 import SinglePost from './components/AllPost/SinglePost/SinglePost';
 import Comments from './components/Comments/Comments';
+import Header from './components/Header/Header';
 
 export const UserContext = createContext()
 
@@ -38,6 +39,7 @@ function App() {
   return (
     <Router>
       <UserContext.Provider value={[users, usersPost]}>
+        <Header></Header>
         <Switch>
           <Route exact path="/">
             <AllPost></AllPost>
@@ -47,6 +49,7 @@ function App() {
             <Comments></Comments>
           </Route>
           <Route path="/comments/:id">
+            {/* <Comments></Comments> */}
           </Route>
         </Switch>
       </UserContext.Provider>

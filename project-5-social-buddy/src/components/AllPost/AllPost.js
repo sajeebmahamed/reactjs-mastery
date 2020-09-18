@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
-import { AppBar, Avatar, Button, Card, CardActions, CardContent, CardHeader, Container, CssBaseline, fade, Grid, IconButton, InputBase, makeStyles, Paper, Toolbar, Typography } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
+import React, { useContext, useEffect, useState } from 'react';
+import {Avatar, Button, Card, CardActions, CardContent, CardHeader, Container, CssBaseline, fade, Grid, IconButton, InputBase, makeStyles, Paper, Toolbar, Typography } from '@material-ui/core';
+
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { UserContext } from '../../App';
 import { Link } from 'react-router-dom';
@@ -66,90 +65,66 @@ const allPostStyle = makeStyles((theme) => ({
 const AllPost = () => {
     const classes = allPostStyle()
     const users = useContext(UserContext)
-    // console.log(users);
-    // const handleClick = (id) => {
-    //     console.log('clicked hyse', id);
-    // }
+    const [pic, setPic] = useState([])
+    console.log(pic);
+    useEffect(() => {
+        async function RandomPic() {
+            const res = await fetch('https://randomuser.me/api/?results=10')
+            const data = await res.json()
+            setPic(data.results)
+            // console.log(data);
+        }
+        RandomPic()
+    }, [])
     return (
         <>
             <CssBaseline />
-            <AppBar position="sticky">
-                <Container>
-                    <Toolbar>
-                        <IconButton
-                            edge="start"
-                            color="inherit"
-                            className={classes.menuButton}
-                            aria-label="open drawer"
-                        >
-                            <MenuIcon></MenuIcon>
-                        </IconButton>
-                        <Typography variant="h6" noWrap>
-                            Material-UI
-                        </Typography>
-                        <div className={classes.search}>
-                            <div className={classes.searchIcon}>
-                                <SearchIcon />
-                            </div>
-                            <InputBase
-                                placeholder="Search…"
-                                classes={{
-                                    root: classes.inputRoot,
-                                    input: classes.inputInput,
-                                }}
-                                inputProps={{ 'aria-label': 'search' }}
-                            />
-                        </div>
-                    </Toolbar>
-                </Container>
-            </AppBar>
+            
             <Container maxWidth="md" component="main">
                 <Grid container spacing={3}>
                     {
                         users[0].map(singleUser => (
                             users[1].map(userPost => (
-                                <>
-                                    {singleUser.id === userPost.id &&
-                                        <Grid item xs={12} md={4}>
-                                            <Paper className={classes.paper}>
-                                                <Card className={classes.root}>
-                                                    <CardHeader
-                                                        avatar={
-                                                            <Avatar aria-label="recipe" className={classes.avatar}>
-                                                                {/* <img src={photos.picture.large} alt=""/> */}
-                                                            </Avatar>
-                                                        }
-                                                        action={
-                                                            <IconButton aria-label="settings">
-                                                                <MoreVertIcon />
-                                                            </IconButton>
-                                                        }
-                                                        title={singleUser.name}
-                                                        subheader={singleUser.email}
-                                                    />
+                                pic.map(uImg => (
+                                    <>
+                                        {singleUser.id === userPost.id &&
+                                            <Grid item xs={12} md={4}>
+                                                <Paper className={classes.paper}>
+                                                    <Card className={classes.root}>
+                                                        <CardHeader
+                                                            avatar={
+                                                                <Avatar aria-label="recipe" className={classes.avatar}>
+                                                                <img src={uImg.picture.thumbnail} alt="" />
+                                                                </Avatar>
+                                                            }
+                                                            action={
+                                                                <IconButton aria-label="settings">
+                                                                    <MoreVertIcon />
+                                                                </IconButton>
+                                                            }
+                                                            title={singleUser.name}
+                                                            subheader={singleUser.email}
+                                                        />
 
-                                                    <CardContent>
-                                                        <Typography variant="h6" component="h2">
-                                                            {userPost.title}
-                                                        </Typography>
-                                                        {/* <Typography variant="body2" component="p">
-                                                           {userPost.body}
-                                                            <br />
-                                                        </Typography> */}
-                                                    </CardContent>
-                                                    <CardActions>
-                                                        {/* <Button onClick={() => handleClick(singleUser.id)} size="small">Read More</Button> */}
-                                                        <Button size="small">
-                                                        <Link to= {`/user/${singleUser.id}`}>
-                                                                Read More
+                                                        <CardContent>
+                                                            <Typography variant="h6" component="h2">
+                                                                {userPost.title}
+                                                            </Typography>
+
+                                                        </CardContent>
+                                                        <CardActions>
+                                                            <Button size="small">
+                                                                <Link to={`/user/${singleUser.id}`}>
+                                                                    Read More
                                                             </Link>
-                                                        </Button>
-                                                    </CardActions>
-                                                </Card>
-                                            </Paper>
-                                        </Grid>
-                                    }
-                                </>
+                                                            </Button>
+                                                        </CardActions>
+                                                    </Card>
+                                                </Paper>
+                                            </Grid>
+                                        }
+                                    </>
+                                ))
                             ))
                         ))
                     }

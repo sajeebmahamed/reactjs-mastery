@@ -24,11 +24,10 @@ const commentStyle = makeStyles((theme) => ({
 const Comments = () => {
     const classes = commentStyle()
     const { id } = useParams()
-    const [showComments, setShowComments] = useState({})
-    console.log(showComments);
+    const [showComments, setShowComments] = useState([])
     useEffect(() => {
         async function Comments() {
-            const res = await fetch(`https://jsonplaceholder.typicode.com/comments/${id}`)
+            const res = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${id}`)
             const data = await res.json()
             setShowComments(data)
         }
@@ -39,27 +38,31 @@ const Comments = () => {
             <CssBaseline />
             <Container maxWidth="md">
                 <List className={classes.root}>
-                    <ListItem alignItems="flex-start">
-                        <ListItemAvatar>
-                            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                        </ListItemAvatar>
-                        <ListItemText
-                            primary={showComments.name}
-                            secondary={
-                                <React.Fragment>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        className={classes.inline}
-                                        color="textPrimary"
-                                    >
-                                        {showComments.email}
-                            </Typography>
-                                    {showComments.body}
-                                </React.Fragment>
-                            }
-                        />
-                    </ListItem>
+                    {
+                        showComments.map(comments => (
+                            <ListItem alignItems="flex-start">
+                                <ListItemAvatar>
+                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary={comments.name}
+                                    secondary={
+                                        <React.Fragment>
+                                            <Typography
+                                                component="span"
+                                                variant="body2"
+                                                className={classes.inline}
+                                                color="textPrimary"
+                                            >
+                                                {comments.email}
+                                            </Typography>
+                                            {comments.body}
+                                        </React.Fragment>
+                                    }
+                                />
+                            </ListItem>
+                        ))
+                    }
                     <Divider variant="inset" component="li" />
                 </List>
             </Container>
