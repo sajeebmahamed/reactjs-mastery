@@ -32,9 +32,16 @@ function App() {
     UsersPost()
   }, [])
 
-  // const handleClick = () => {
-  //     console.log("clicked");
-  // }
+  const [pic, setPic] = useState([])
+  useEffect(() => {
+    async function RandomPic() {
+      const res = await fetch('https://randomuser.me/api/?results=5')
+      const data = await res.json()
+      setPic(data.results)
+      // console.log(data);
+    }
+    RandomPic()
+  }, [])
 
   return (
     <Router>
@@ -42,11 +49,11 @@ function App() {
         <Header></Header>
         <Switch>
           <Route exact path="/">
-            <AllPost></AllPost>
+            <AllPost pic={pic}></AllPost>
           </Route>
           <Route path="/user/:id">
             <SinglePost></SinglePost>
-            <Comments></Comments>
+            <Comments pic={pic}></Comments>
           </Route>
           <Route path="/comments/:id">
             {/* <Comments></Comments> */}

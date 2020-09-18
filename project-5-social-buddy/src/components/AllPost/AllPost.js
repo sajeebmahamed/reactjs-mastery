@@ -62,20 +62,10 @@ const allPostStyle = makeStyles((theme) => ({
 
 
 
-const AllPost = () => {
+const AllPost = (props) => {
     const classes = allPostStyle()
     const users = useContext(UserContext)
-    const [pic, setPic] = useState([])
-    console.log(pic);
-    useEffect(() => {
-        async function RandomPic() {
-            const res = await fetch('https://randomuser.me/api/?results=10')
-            const data = await res.json()
-            setPic(data.results)
-            // console.log(data);
-        }
-        RandomPic()
-    }, [])
+    const pic = props.pic
     return (
         <>
             <CssBaseline />
