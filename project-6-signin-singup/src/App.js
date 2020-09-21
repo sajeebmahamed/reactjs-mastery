@@ -12,7 +12,9 @@ function App() {
     name: '',
     email: '',
     password: '',
-    photo: ''
+    photo: '',
+    error: '',
+    success: false
   })
 
   const [userInfo, setUserInfo] = useState({
@@ -38,20 +40,24 @@ function App() {
     }
   }
   const createAccount = (e) => {
-
-    // console.log(userInfo.name, userInfo.email, userInfo.password);
-    // firebase.auth().createUserWithEmailAndPassword(userInfo.email, userInfo.password)
-    // .then(res => {
-    //   console.log(res);
-    // })
-    // .catch(err => {
-    //   console.log(err);
-    // })
-    // e.preventDefault()
     console.log(user.email, user.password);
 
     if(user.email && user.password) {
-      console.log('submit');
+      firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+        .then(res => {
+          console.log(res);
+          const newUser = {...user}
+          newUser.error = ''
+          newUser.success = true
+          setUser(newUser) 
+        })
+        .catch(err => {
+          console.log(err.message);
+          const newUser = {...user}
+          newUser.error = err.message
+          newUser.success = false
+          setUser(newUser)
+        })
     }
     e.preventDefault();
     
@@ -110,6 +116,10 @@ function App() {
         <input onBlur={newUserHandle} name="password" type="password" placeholder="enter password" />
         <input type="submit" value="submit" />
       </form>
+      <p> {user.error} </p>
+      {
+        user.success && <p> New user created successfull </p>
+      }
       <>
         { user.isSignedIn ?
           <button onClick={handleSingOutGoogle}>sing out</button> :
