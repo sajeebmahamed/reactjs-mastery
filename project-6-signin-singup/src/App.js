@@ -7,6 +7,7 @@ require('dotenv').config()
 
 function App() {
   const provider = new firebase.auth.GoogleAuthProvider();
+  const fbProvider = new firebase.auth.FacebookAuthProvider();
   const [user, setUser] = useState({
     isSignedIn: false,
     name: '',
@@ -17,12 +18,8 @@ function App() {
     success: false
   })
 
-  const [userInfo, setUserInfo] = useState({
-    name: '',
-    email: '',
-    password: ''
-  })
-  // console.log(userInfo);
+  const [newUser, setNewUser] = useState(false)
+
   const newUserHandle = (e) => {
     let isFromValid = true
     if (e.target.name === 'email') {
@@ -40,9 +37,7 @@ function App() {
     }
   }
   const createAccount = (e) => {
-    console.log(user.email, user.password);
-
-    if(user.email && user.password) {
+    if(newUser && user.email && user.password) {
       firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
         .then(res => {
           console.log(res);
@@ -50,10 +45,28 @@ function App() {
           newUser.error = ''
           newUser.success = true
           setUser(newUser) 
+          updateUserName(user.name)
         })
         .catch(err => {
           console.log(err.message);
           const newUser = {...user}
+          newUser.error = err.message
+          newUser.success = false
+          setUser(newUser)
+        })
+    }
+    if (!newUser && user.email && user.password) {
+      firebase.auth().signInWithEmailAndPassword(user.email, user.password)
+        .then(res => {
+          const newUser = { ...user }
+          newUser.error = ''
+          newUser.success = true
+          setUser(newUser)
+          console.log("sign in", res.user);
+        })
+        .catch(err => {
+          console.log(err.message);
+          const newUser = { ...user }
           newUser.error = err.message
           newUser.success = false
           setUser(newUser)
@@ -98,6 +111,33 @@ function App() {
         console.log(err);
       })
   }
+  const updateUserName = name => {
+    const user = firebase.auth().currentUser
+    user.updateProfile({
+      displayName: name
+    })
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+  const handleFb = () => {
+    firebase.auth().signInWithPopup(fbProvider)
+    .then(res => {
+      let token = res.credential.accessToken;
+      let user = res.user;
+      console.log(token);
+      console.log(user);
+    })
+    .catch(err => {
+      let errorMessage = err.message;
+      let email = err.email;
+      console.log(errorMessage);
+      console.log(email);
+    })
+  }
   return (
     <div>
       { user.isSignedIn && <div>
@@ -110,21 +150,22 @@ function App() {
         <p> {user.name} </p>
         <p> {user.email} </p>
       </div>
+      <input type="checkbox" onChange={() => setNewUser(!newUser)} name="newUser" id="" />
+      <label htmlFor="newUser">New User Sign up</label>
       <form onSubmit={createAccount}>
-        <input onBlur={newUserHandle} name="name" type="text" placeholder="enter name" />
-        <input onBlur={newUserHandle} name="email" type="email" placeholder="enter name" />
+        {newUser && <input onBlur={newUserHandle} name="name" type="text" placeholder="enter name" />}
+        <input onBlur={newUserHandle} name="email" type="email" placeholder="enter email" />
         <input onBlur={newUserHandle} name="password" type="password" placeholder="enter password" />
         <input type="submit" value="submit" />
       </form>
       <p> {user.error} </p>
-      {
-        user.success && <p> New user created successfull </p>
-      }
+      { user.success && <p style={{ color: 'green' }}>User {newUser ? 'created' : 'Logged In'} successfully</p>}
       <>
         { user.isSignedIn ?
           <button onClick={handleSingOutGoogle}>sing out</button> :
           <button onClick={handleSinginGoogle}>sing in</button>
         }
+        <button onClick={handleFb}> singin with facebook </button>
 
       </>
     </div>
