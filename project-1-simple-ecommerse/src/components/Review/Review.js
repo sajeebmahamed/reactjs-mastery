@@ -1,5 +1,6 @@
 import React, { createFactory, useEffect, useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import fakeData from '../../fakeData';
 import { getDatabaseCart, processOrder, removeFromDatabaseCart } from '../../utilities/databaseManager';
 import Cart from '../Cart/Cart';
@@ -50,7 +51,9 @@ const Review = () => {
                 </Col>
                 <Col md={4}>
                     <Cart cart={cart}>
-                        <Button onClick={handlePlaceOrder}>Place Order</Button>
+                        <Button onClick={handlePlaceOrder}>
+                            <Link style={{textDecoration:'none', color:"#fff"}} to="/shipment"> Procced to checkout </Link>
+                        </Button>
                     </Cart>
                 </Col>
             </Row>

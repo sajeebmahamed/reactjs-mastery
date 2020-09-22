@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {Container, Row, Col, Nav} from 'react-bootstrap'
 import logo from '../../images/logo.png'
 import './Header.scss'
 import { Link } from 'react-router-dom'
+import { LogInContext } from '../../App'
 const Header = () => {
+    const [logedInUser] = useContext(LogInContext)
+    console.log(logedInUser);
     return (
         <Container id="header">
             <Row>
@@ -28,6 +31,9 @@ const Header = () => {
                             <Link to="/inventory">
                                 Manage Inventory
                             </Link>
+                        </a>
+                        <a href="">
+                            {logedInUser.email }
                         </a>
                     </Nav>
                 </Col>
