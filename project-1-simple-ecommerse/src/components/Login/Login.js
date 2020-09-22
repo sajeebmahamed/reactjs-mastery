@@ -3,6 +3,7 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import { firebaseConfig } from './firebase.config';
 import { LogInContext } from '../../App';
+import { useHistory, useLocation } from 'react-router-dom';
 
 
 firebase.initializeApp(firebaseConfig)
@@ -19,9 +20,12 @@ const Login = () => {
         error: '',
         success: false
     })
+    const [newUser, setNewUser] = useState(false)
     const [logedInUser, setLogedInUser] = useContext(LogInContext)
 
-    const [newUser, setNewUser] = useState(false)
+    let history = useHistory();
+    let location = useLocation();
+    let { from } = location.state || { from: { pathname: "/" } };
 
     const newUserHandle = (e) => {
         let isFromValid = true
@@ -93,6 +97,7 @@ const Login = () => {
                 }
                 setUser(singnedInUSer)
                 setLogedInUser(singnedInUSer)
+                history.replace(from);
             })
             .catch(err => {
                 console.log(err.message);

@@ -14,6 +14,7 @@ import NotMatch from './components/NotMatch/NotMatch';
 import ProductDetails from './components/ProductDetails/ProductDetails';
 import Shipment from './components/Shipment/Shipment';
 import Login from './components/Login/Login';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 export const LogInContext = createContext()
 
@@ -38,9 +39,9 @@ function App() {
           <Route path="/product/:productKey">
             <ProductDetails></ProductDetails>
           </Route>
-          <Route path="/shipment">
+          <PrivateRoute path="/shipment">
             <Shipment></Shipment>
-          </Route>
+          </PrivateRoute>
           <Route path="/login">
             <Login></Login>
           </Route>
