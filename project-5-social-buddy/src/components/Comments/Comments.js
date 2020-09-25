@@ -41,10 +41,10 @@ const Comments = (props) => {
                 <List className={classes.root}>
                     {
                         showComments.map(comments => (
-                            pic.map(uPic => (
+                            // pic.map(uPic => (
                                 <ListItem alignItems="flex-start">
                                     <ListItemAvatar>
-                                        <Avatar alt="Remy Sharp" src={uPic.picture.thumbnail} />
+                                        {/* <Avatar alt="Remy Sharp" src={uPic.picture.thumbnail} /> */}
                                     </ListItemAvatar>
                                     <ListItemText
                                         primary={comments.name}
@@ -64,7 +64,7 @@ const Comments = (props) => {
                                     />
                                 </ListItem>
                             ))
-                        ))
+                        // ))
                     }
                     <Divider variant="inset" component="li" />
                 </List>

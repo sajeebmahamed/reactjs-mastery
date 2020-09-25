@@ -25,7 +25,7 @@ function App() {
     }
     Users()
     async function UsersPost() {
-      const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+      const res = await fetch('https://jsonplaceholder.typicode.com/posts/?results=10')
       const data = await res.json()
       setUsersPost(data)
     }
@@ -35,7 +35,7 @@ function App() {
   const [pic, setPic] = useState([])
   useEffect(() => {
     async function RandomPic() {
-      const res = await fetch('https://randomuser.me/api/?results=5')
+      const res = await fetch('https://randomuser.me/api/?results=10')
       const data = await res.json()
       setPic(data.results)
       // console.log(data);

@@ -75,7 +75,7 @@ const AllPost = (props) => {
                     {
                         users[0].map(singleUser => (
                             users[1].map(userPost => (
-                                pic.map(uImg => (
+                                pic.map((uImg, i) => (
                                     <>
                                         {singleUser.id === userPost.id &&
                                             <Grid item xs={12} md={4}>

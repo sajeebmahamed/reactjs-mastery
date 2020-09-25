@@ -5,7 +5,7 @@ import './Header.scss'
 import { Link } from 'react-router-dom'
 import { LogInContext } from '../../App'
 const Header = () => {
-    const [logedInUser] = useContext(LogInContext)
+    const [logedInUser, setLogedInUser] = useContext(LogInContext)
     console.log(logedInUser);
     return (
         <Container id="header">
@@ -32,8 +32,11 @@ const Header = () => {
                                 Manage Inventory
                             </Link>
                         </a>
-                        <a href="">
+                        <a href="#">
                             {logedInUser.email }
+                        </a>
+                        <a>
+                            {logedInUser.email && <button onClick={() => setLogedInUser({})}> Sing Out </button>}
                         </a>
                     </Nav>
                 </Col>
