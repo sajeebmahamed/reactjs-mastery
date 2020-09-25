@@ -19,6 +19,14 @@ const PatientManagement = () => {
             <form onSubmit={handleSubmit}>
                 <input ref={nameRef}/>
             </form>
+            {
+                state.patient.map(pt => <li
+                    key={pt.id}
+                    onClick={() => dispatch({ type:'REMOVE_PATIENT', id: pt.id})}
+                >
+                    {pt.name}
+                </li>)
+            }
         </div>
     );
 };

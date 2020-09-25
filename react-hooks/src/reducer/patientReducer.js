@@ -8,10 +8,12 @@ export const patientReducer = (state, action) => {
                 id: action.id,
                 name: action.name
             }
-            const allPatient = [...state.patient, newPatient]
-            return { patient: allPatient }
+            // const allPatient = [...state.patient, newPatient]
+            return { patient: [...state.patient, newPatient] }
         case 'REMOVE_PATIENT':
-            return state
+            const remainingPatient = state.patient.filter(pt => pt.id !== action.id)
+            const newState = { patient: remainingPatient}
+            return newState
         default:
             return state
     }
