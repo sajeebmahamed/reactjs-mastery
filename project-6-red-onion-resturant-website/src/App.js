@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import Banner from './component/Banner/Banner';
 import Header from './component/Header/Header';
+import MainFoods from './component/MainFoods/MainFoods';
 import { foodsData } from './data/foods';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     <div>
       <Header />
       <Banner />
+      <MainFoods foods={foods} />
     </div>
   );
 }
