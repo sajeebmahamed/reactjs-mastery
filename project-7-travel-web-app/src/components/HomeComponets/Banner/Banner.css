@@ -1,0 +1,17 @@
+
+.sundorbon img{
+    position: absolute;
+    width: 270px;
+    height: 416px;
+    left:0%;
+    top: 10%;
+    background: linear-gradient(0.12deg, #000000 0.1%, rgba(0, 0, 0, 0) 69.96%);
+    border-radius: 20px;
+}
+.sundorbon h1 {
+    position: absolute;
+    width: 144px;
+    height: 36px;
+    left: 0%;
+    top: 10%;
+}

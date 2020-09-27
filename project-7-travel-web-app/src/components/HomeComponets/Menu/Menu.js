@@ -1,5 +1,6 @@
 import React from 'react';
-import {Col, Container, Form, FormControl, Nav, Navbar, Row } from 'react-bootstrap';
+import { Col, Container, Form, FormControl, Nav, Navbar, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import logo from '../../../Image/Logo.png'
 import './Menu.css'
 const Menu = () => {
@@ -8,9 +9,11 @@ const Menu = () => {
             <Row>
                 <Col>
                     <Navbar bg="light" expand="lg">
-                        <Navbar.Brand href="#home">
-                            <img width="30%" src={logo} alt="logo"/>
-                        </Navbar.Brand>
+                        <Link to="/">
+                            <Navbar.Brand>
+                                <img width="30%" src={logo} alt="logo" />
+                            </Navbar.Brand>
+                        </Link>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Form inline>
@@ -22,7 +25,7 @@ const Menu = () => {
                                 <Nav.Link className="menu-item" href="#link">Blog</Nav.Link>
                                 <Nav.Link className="menu-item" href="#link">Contact</Nav.Link>
                                 <Nav.Link className="menu-item" href="#link">Login</Nav.Link>
-                                
+
                             </Nav>
                         </Navbar.Collapse>
                     </Navbar>
