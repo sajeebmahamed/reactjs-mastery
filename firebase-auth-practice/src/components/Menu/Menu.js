@@ -11,6 +11,7 @@ const Menu = () => {
                     <li> <Link to="/admin">Admin</Link> </li>
                     <li> <Link to="/blog">Blog</Link> </li>
                     <li> <Link to="/dashboard">Dashboard</Link> </li>
+                    <li> <Link to="/appointment">Appointment</Link> </li>
                     <li> <Link to="/login">Login</Link> </li>
                     
                 </ul>

@@ -17,6 +17,7 @@ import Blog from './components/Blog/Blog';
 import Shipment from './components/Shipment/Shipment';
 import Menu from './components/Menu/Menu';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import Appoitments from './components/Appointments/Appoitments';
 
 
 export const UserContext = createContext()
@@ -48,6 +49,9 @@ function App() {
           </PrivateRoute>
           <Route path="/blog">
             <Blog/>
+          </Route>
+          <Route path ="/appointment">
+            <Appoitments />
           </Route>
           <Route path="/login">
             <Login />
