@@ -7,6 +7,7 @@ require("firebase/auth");
 firebase.initializeApp(firebaseConfig)
 
 const Login = () => {
+    const [newUser, setNewUser] = useState(false)
     const [user, setUser] = useState({
         isSignedIn: false,
         name: '',
@@ -70,7 +71,7 @@ const Login = () => {
         e.preventDefault();
     }
     const handleSubmit = (e) => {
-        if(user.email && user.password) {
+        if(newUser && user.email && user.password) {
             firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
                 .then(res => {
                     const newUserInfo = {...user}
@@ -80,6 +81,21 @@ const Login = () => {
                 })
                 .catch(err => {
                     const newUserInfo = {...user}
+                    newUserInfo.error = err.message
+                    newUserInfo.success = false
+                    setUser(newUserInfo)
+                })
+        }
+        if(!newUser && user.email && user.password) {
+            firebase.auth().signInWithEmailAndPassword(user.email, user.password)
+                .then(res => {
+                    const newUserInfo = { ...user }
+                    newUserInfo.error = ''
+                    newUserInfo.success = true
+                    setUser(newUserInfo)
+                })
+                .catch(err => {
+                    const newUserInfo = { ...user }
                     newUserInfo.error = err.message
                     newUserInfo.success = false
                     setUser(newUserInfo)
@@ -107,12 +123,17 @@ const Login = () => {
                     <Button onClick={handleGoogleSingIn}> Sign in with google </Button>
             }
             <div>
+                <input type="checkbox" onChange={() => setNewUser(!newUser)} name="newUser" />
+                <label htmlFor="newUser"> New User Sign Up </label>
                 <Form onClick={handleSubmit} style={{width: '50%', margin:'0 auto'}}>
 
-                    <Form.Group controlId="formBasicName">
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control name="name" onBlur={handleChange} type="text" placeholder="Enter Name" />
-                    </Form.Group>
+                    {
+                        newUser && 
+                        <Form.Group controlId="formBasicName">
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control name="name" onBlur={handleChange} type="text" placeholder="Enter Name" />
+                        </Form.Group>
+                    }
 
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
@@ -129,7 +150,7 @@ const Login = () => {
                     </Button>
                 </Form>
                     <p> {user.error} </p>
-                    {user.success && <p> user created successfull </p> }
+                    {user.success && <p> user {newUser ? 'created': 'Logged In'} successfull </p> }
             </div>
         </div>
     );
