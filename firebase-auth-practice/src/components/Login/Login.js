@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { useHistory, useLocation } from 'react-router-dom';
+import { UserContext } from '../../App';
 import { firebaseConfig } from '../../firebase.config';
 const firebase = require("firebase/app");
 require("firebase/auth");
@@ -7,9 +9,13 @@ require("firebase/auth");
 if(!firebase.app.length) {
     firebase.initializeApp(firebaseConfig)
 }
-
 const Login = () => {
     const [newUser, setNewUser] = useState(false)
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext)
+    let history = useHistory();
+    let location = useLocation();
+    let { from } = location.state || { from: { pathname: "/" } };
+
     const [user, setUser] = useState({
         isSignedIn: false,
         name: '',
@@ -32,6 +38,8 @@ const Login = () => {
                     photo: photoURL
                 }
                 setUser(singedInUser)
+                setLoggedInUser(singedInUser)
+                history.replace(from);
             })
             .catch(err => {
                 console.log(err);
@@ -97,7 +105,8 @@ const Login = () => {
                     newUserInfo.error = ''
                     newUserInfo.success = true
                     setUser(newUserInfo)
-                    console.log(res);
+                    setLoggedInUser(newUserInfo)
+                    history.replace(from);
                 })
                 .catch(err => {
                     const newUserInfo = { ...user }

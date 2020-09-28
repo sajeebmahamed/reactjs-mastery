@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,17 +11,23 @@ import './App.css'
 import { firebaseConfig } from './firebase.config';
 import Login from './components/Login/Login';
 import LoginMySelft from './components/LoginMySelft/LoginMySelft';
-const firebase = require("firebase/app");
-require("firebase/auth");
+import Admin from './components/Admin/Admin';
+import Dashboard from './components/Dashboard/Dashboard';
+import Blog from './components/Blog/Blog';
+import Shipment from './components/Shipment/Shipment';
+import Menu from './components/Menu/Menu';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig)
-}
 
+export const UserContext = createContext()
 function App() {
+  const [loggedInUser, setLoggedInUser] = useState({})
   return (
+      <UserContext.Provider value = {[loggedInUser, setLoggedInUser]} >
     <div className="App">
+      {loggedInUser.email}
       <Router>
+        <Menu />
         <Switch>
           <Route exact path="/">
             <Header />
@@ -31,10 +37,25 @@ function App() {
           <Route path="/myself">
             <LoginMySelft />
           </Route>
+          <Route path="/shipment">
+            <Shipment />
+          </Route>
+          <PrivateRoute path="/admin">
+            <Admin />
+          </PrivateRoute>
+          <PrivateRoute path="/dashboard">
+            <Dashboard />
+          </PrivateRoute>
+          <Route path="/blog">
+            <Blog/>
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
         </Switch>
       </Router>
-      
     </div>
+      </UserContext.Provider>
   );
 }
 
