@@ -4,7 +4,9 @@ import { firebaseConfig } from '../../firebase.config';
 const firebase = require("firebase/app");
 require("firebase/auth");
 
-firebase.initializeApp(firebaseConfig)
+if(!firebase.app.length) {
+    firebase.initializeApp(firebaseConfig)
+}
 
 const Login = () => {
     const [newUser, setNewUser] = useState(false)
@@ -18,7 +20,8 @@ const Login = () => {
         error: ''
     })
     const provider = new firebase.auth.GoogleAuthProvider();
-    const handleGoogleSingIn = () => {
+    const handleGoogleSingIn = (e) => {
+        e.preventDefault()
         firebase.auth().signInWithPopup(provider)
             .then(res => {
                 const { displayName, photoURL, email } = res.user
@@ -78,6 +81,7 @@ const Login = () => {
                     newUserInfo.error = ''
                     newUserInfo.success = true
                     setUser(newUserInfo)
+                    updateUserInfo(user.name)
                 })
                 .catch(err => {
                     const newUserInfo = {...user}
@@ -93,6 +97,7 @@ const Login = () => {
                     newUserInfo.error = ''
                     newUserInfo.success = true
                     setUser(newUserInfo)
+                    console.log(res);
                 })
                 .catch(err => {
                     const newUserInfo = { ...user }
@@ -102,6 +107,17 @@ const Login = () => {
                 })
         }
         e.preventDefault()
+    }
+
+    const updateUserInfo = name => {
+        const user = firebase.auth().currentUser;
+        user.updateProfile({
+            displayName: name
+        }).then(function () {
+            console.log("user updated");
+        }).catch(function (error) {
+            console.log("error occured");
+        });
     }
 
     return (
