@@ -1,0 +1,16 @@
+#booking-box {
+    width: 22rem;
+    height: 22rem;
+    background-color: #fff;
+    border-radius: 0.5rem;
+}
+
+#bookingFrom input {
+    display: block;
+    padding: 5px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 300px;
+    margin-left: 1.5rem;
+    padding-top: 0.7rem;
+}

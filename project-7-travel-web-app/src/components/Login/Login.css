@@ -1,0 +1,39 @@
+.mainForm {
+    margin-top: 4rem;
+}
+.login-form {
+    margin: 5rem auto;
+    border: 1px solid gray;
+    padding: 2rem 2rem;
+    border-radius: 0.2rem;
+
+}
+.login-form input {
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid gray;
+    padding: 3rem 0;
+}
+.mainBtn {
+    width: 100%;
+    border-radius: inherit !important;
+    padding: 0.5rem 0rem;
+    background-color: #F9A51A !important;
+    border: none !important;
+}
+.f-text {
+    color: #F9A51A;
+    cursor: pointer;
+}
+.socialBtn {
+    padding: 0.5rem 6rem;
+    /* border: navajowhite; */
+    border-radius: 1rem;
+    margin: 0 auto;
+    display: block;
+    /* background-color: #F9A51A; */
+    background: none;
+    border: 1px solid gray;
+    font-size: 1rem;
+    margin-top: 2rem;
+}

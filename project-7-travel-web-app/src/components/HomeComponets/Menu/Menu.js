@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Col, Container, Form, FormControl, Nav, Navbar, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../../App';
 import logo from '../../../Image/Logo.png'
 import './Menu.css'
 const Menu = () => {
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext)
     return (
         <Container>
             <Row>
@@ -24,6 +26,7 @@ const Menu = () => {
                                 <Nav.Link className="menu-item" href="#link">Destination</Nav.Link>
                                 <Nav.Link className="menu-item" href="#link">Blog</Nav.Link>
                                 <Nav.Link className="menu-item" href="#link">Contact</Nav.Link>
+                                <Nav.Link className="menu-item" > {loggedInUser.email} </Nav.Link>
                                 <Nav.Link className="menu-item" href="#link">Login</Nav.Link>
 
                             </Nav>

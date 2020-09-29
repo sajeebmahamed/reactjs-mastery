@@ -1,17 +1,18 @@
 
-.sundorbon img{
-    position: absolute;
+.sreemangal img {
+    position: relative;
     width: 270px;
     height: 416px;
-    left:0%;
-    top: 10%;
+    /* left:0%; */
+    /* top: 10%; */
     background: linear-gradient(0.12deg, #000000 0.1%, rgba(0, 0, 0, 0) 69.96%);
     border-radius: 20px;
+    border: 4px solid yellow;
 }
-.sundorbon h1 {
+.sreemangal-h1 {
+    color: #fff;
     position: absolute;
-    width: 144px;
-    height: 36px;
-    left: 0%;
-    top: 10%;
+    top: 80%;
+    z-index: 1;
+    right: 36%;
 }
