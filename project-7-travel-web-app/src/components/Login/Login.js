@@ -97,8 +97,8 @@ const Login = () => {
     }
 
     //sign in with google
-    const provider = new firebase.auth.GoogleAuthProvider();
     const handleGoogleSingIn = (e) => {
+        const provider = new firebase.auth.GoogleAuthProvider();
         e.preventDefault()
         firebase.auth().signInWithPopup(provider)
             .then(res => {
@@ -124,8 +124,8 @@ const Login = () => {
 
     //singin with facebook start
 
-    const fbProvider = new firebase.auth.FacebookAuthProvider();
     const handleFbSingIn = () => {
+        const fbProvider = new firebase.auth.FacebookAuthProvider();
         firebase.auth().signInWithPopup(fbProvider)
             .then(res => {
                 const { displayName, photoURL, email } = res.user
