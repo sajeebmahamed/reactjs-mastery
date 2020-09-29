@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Autocomplete, GoogleMap, InfoWindow, LoadScript, Marker } from '@react-google-maps/api';
+import {GoogleMap, LoadScript } from '@react-google-maps/api';
 import { PlaceContext } from '../../../App';
 
 const Map = () => {

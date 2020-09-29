@@ -5,7 +5,7 @@ import { UserContext } from '../../../App';
 import logo from '../../../Image/Logo.png'
 import './Menu.css'
 const Menu = () => {
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext)
+    const [loggedInUser] = useContext(UserContext)
     return (
         <Container>
             <Row>
@@ -27,7 +27,6 @@ const Menu = () => {
                                 <Nav.Link className="menu-item" href="#link">Blog</Nav.Link>
                                 <Nav.Link className="menu-item" href="#link">Contact</Nav.Link>
                                 <Nav.Link className="menu-item" > {loggedInUser.email} </Nav.Link>
-                                <Nav.Link className="menu-item" href="#link">Login</Nav.Link>
 
                             </Nav>
                         </Navbar.Collapse>

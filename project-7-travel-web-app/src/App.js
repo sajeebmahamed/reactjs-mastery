@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 import Booking from './components/BookingComponents/Booking';
 import Details from './components/Details/Details';

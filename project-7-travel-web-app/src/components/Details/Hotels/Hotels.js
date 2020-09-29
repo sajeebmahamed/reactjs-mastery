@@ -8,7 +8,6 @@ import Map from '../Map/Map';
 const Hotels = () => {
     const hotels = hotelData
     const [singlePlace] = useContext(PlaceContext)
-    console.log(singlePlace);
     return (
         <Container>
             <Row>

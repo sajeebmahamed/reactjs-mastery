@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
-import { Container, Row, Col, Button, Card } from 'react-bootstrap';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useContext} from 'react';
+import { Container, Row, Col, Card } from 'react-bootstrap';
+import {useHistory } from 'react-router-dom';
 import "react-datepicker/dist/react-datepicker.css";
 import './BookingBanner.css'
 import { PlaceContext } from '../../../App';
@@ -8,23 +8,23 @@ import { useForm } from 'react-hook-form';
 
 const BookingBanner = () => {
     let history = useHistory();
-    const { register, handleSubmit, watch, errors, control } = useForm();
+    const { register, handleSubmit, errors } = useForm();
     const onSubmit = data => {
         history.push('./details')
     };
     const [singlePlace] = useContext(PlaceContext)
     return (
         <Container>
-            <Row>
-                <Col md={4} style={{ color: '#fff' }}>
+            <Row style={{marginTop:'5rem'}}>
+                <Col md={6} style={{ color: '#fff' }}>
                     <h1> {singlePlace.name} </h1>
                     <p>
                         {singlePlace.full_des}
                     </p>
                 </Col>
-                <Col md={8}>
+                <Col md={6}>
                    <div id="">
-                        <Card style={{ width: '24rem' }}>
+                        <Card style={{ width: '24rem', height:'66vh' }}>
                             <Card.Body>
                                 <Card.Text>
                                     <form id="bookingFrom" onSubmit={handleSubmit(onSubmit)}>
