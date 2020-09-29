@@ -8,10 +8,11 @@ import {
 import Booking from './components/BookingComponents/Booking';
 import Details from './components/Details/Details';
 import HomeComponets from './components/HomeComponets/HomeComponets';
+import Menu from './components/HomeComponets/Menu/Menu';
 import Login from './components/Login/Login';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
-export const UserContext = createContext();
+export const UserContext = createContext()
 export const PlaceContext = createContext()
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
@@ -27,13 +28,12 @@ function App() {
             <Route path="/booking">
               <Booking />
             </Route>
-            <Route path="/dynamic/:id">
-              <h1> Dynamic </h1>
-            </Route>
-            <Route path="/details">
+            <PrivateRoute path="/details">
+              <Menu />
               <Details />
-            </Route>
+            </PrivateRoute>
             <Route to="/login">
+              <Menu />
               <Login />
             </Route>
           </Switch>

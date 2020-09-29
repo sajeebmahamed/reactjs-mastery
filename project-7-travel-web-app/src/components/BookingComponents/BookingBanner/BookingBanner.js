@@ -11,10 +11,8 @@ const BookingBanner = () => {
     const { register, handleSubmit, watch, errors, control } = useForm();
     const onSubmit = data => {
         history.push('./details')
-        console.log(data);
     };
     const [singlePlace] = useContext(PlaceContext)
-    console.log(singlePlace);
     return (
         <Container>
             <Row>

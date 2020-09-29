@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
+import { PlaceContext } from '../../../App';
 import { hotelData } from '../../../data/hotelData';
 import imgage from '../../../Image/Rectangle 26.png'
+import Map from '../Map/Map';
 
 const Hotels = () => {
     const hotels = hotelData
+    const [singlePlace] = useContext(PlaceContext)
+    console.log(singlePlace);
     return (
         <Container>
             <Row>
@@ -37,7 +41,7 @@ const Hotels = () => {
                     }
                 </Col>
                 <Col md={6}>
-                
+                    <Map />
                 </Col>
             </Row>
         </Container>
