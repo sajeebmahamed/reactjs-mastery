@@ -7,6 +7,14 @@ import Cart from './components/Cart/Cart';
 import data from './data'
 import useCart from './useCart'
 import ThemeContext from './components/Theme/ThemeContext'
+import ProductDetails from './components/ProductDetails/ProductDetails'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import CheckOut from './components/CheckOut/CheckOut';
 
 
 function App() {
@@ -31,16 +39,32 @@ function App() {
     setProducts(results)
   }, [keyword])
 
-
-
-  return (
- 
-    <ThemeContext.Provider value={{ dark: dark, toggle: toggleDark }}>
-    <div>
-      <Navbar setKeyword={setKeyword}></Navbar>
+  const Home = () => (
+    <>
       <ProductList products={products} addCartItem={addCartItem}></ProductList>
       <Cart cartItems={cartItems} removeCartItems={removeCartItems} clearCart={clearCart}></Cart>
-    </div>
+    </>
+  )
+
+  return (
+
+    <ThemeContext.Provider value={{ dark: dark, toggle: toggleDark }}>
+      <div>
+        <Router>
+          <Navbar setKeyword={setKeyword}></Navbar>
+          <Switch>
+            <Route path="/checkout">
+              <CheckOut />
+            </Route>
+            <Route path="/product/:productId">
+              <ProductDetails />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </Router>
+      </div>
     </ThemeContext.Provider>
   );
 }
