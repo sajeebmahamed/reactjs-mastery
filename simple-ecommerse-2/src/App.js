@@ -11,6 +11,12 @@ import ThemeContext from './components/Theme/ThemeContext'
 
 function App() {
 
+  const [dark, setDark] = useState(false);
+
+  const toggleDark = () => {
+    setDark(isDark => !isDark);
+  };
+
   const [products, setProducts] = useState([...data])
   const [keyword, setKeyword] = useState("")
   const {
@@ -29,7 +35,7 @@ function App() {
 
   return (
  
-      <ThemeContext.Provider value={{ dark: false }}>
+    <ThemeContext.Provider value={{ dark: dark, toggle: toggleDark }}>
     <div>
       <Navbar setKeyword={setKeyword}></Navbar>
       <ProductList products={products} addCartItem={addCartItem}></ProductList>

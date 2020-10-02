@@ -1,27 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ThemeContext from '../Theme/ThemeContext';
 
 const Navbar = ({ setKeyword }) => {
+    const { dark, toggle } = useContext(ThemeContext);
     const handleChange = (e) => {
         setKeyword(e.target.value)
     }
     return (
-        // <ThemeContext.Consumer > {
-        //     value => 
-                
-        //             <div className="nav-bar">
-        //                 <span> My Shop {value.dark ? 'dark' : 'light'} </span>
-        //                 <input type="text" placeholder="search" onChange={handleChange} />
-        //             </div>
-                
-        // }
-            
-        // </ThemeContext.Consumer>
 
         <div className="nav-bar">
-            <span> My Shop  </span>
+            <span> My Shop {dark ? 'dark' : 'light'} </span>
             <input type="text" placeholder="search" onChange={handleChange} />
+            <button onClick={toggle}> Change Theme </button>
         </div>
+
+
+        // <div className="nav-bar">
+        //     <span> My Shop  </span>
+        //     <input type="text" placeholder="search" onChange={handleChange} />
+        // </div>
 
     );
 };

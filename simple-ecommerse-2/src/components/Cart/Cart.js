@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import ThemeContext from '../Theme/ThemeContext';
 
 const CartItems = ({id,title, price, quantity, removeCartItems}) => {
     return(
@@ -15,6 +16,7 @@ const CartItems = ({id,title, price, quantity, removeCartItems}) => {
 const Cart = ({ cartItems, removeCartItems, clearCart}) => {
     const [checkoutOpen, setcheckoutOpen] = useState(false)
     const [address, setAddress] = useState("")
+    const {dark} = useContext(ThemeContext)
     const toggleCheckout = () => {
         setcheckoutOpen(status => !status)
     }
@@ -23,7 +25,7 @@ const Cart = ({ cartItems, removeCartItems, clearCart}) => {
     }
     const total = cartItems.reduce((sum,cur) => sum + cur.price * cur.quantity, 0)
     return (
-        (<div className="cart">
+        (<div className={`cart ${dark ? 'dark' : 'light'}`}>
             <h4> Cart Items </h4>
             <div className="cart-items">
                 {
