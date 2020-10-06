@@ -1,53 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
-import ProductList from './components/ProductList/ProductList';
-import Cart from './components/Cart/Cart';
-import data from './data'
-import useCart from './useCart'
 import ThemeContext from './components/Theme/ThemeContext'
 import ProductDetails from './components/ProductDetails/ProductDetails'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CheckOut from './components/CheckOut/CheckOut';
-
+import Home from './components/Home/Home';
 
 function App() {
-
   const [dark, setDark] = useState(false);
-
   const toggleDark = () => {
     setDark(isDark => !isDark);
   };
-
-  const [products, setProducts] = useState([...data])
   const [keyword, setKeyword] = useState("")
-  const {
-    cartItems,
-    addCartItem,
-    removeCartItems,
-    clearCart
-  } = useCart([], products)
-
-  useEffect(() => {
-    const results = data.filter(product => product.title.toLowerCase().includes(keyword.toLowerCase()))
-    setProducts(results)
-  }, [keyword])
-
-  const Home = () => (
-    <>
-      <ProductList products={products} addCartItem={addCartItem}></ProductList>
-      <Cart cartItems={cartItems} removeCartItems={removeCartItems} clearCart={clearCart}></Cart>
-    </>
-  )
 
   return (
-
     <ThemeContext.Provider value={{ dark: dark, toggle: toggleDark }}>
       <div>
         <Router>
@@ -55,7 +22,7 @@ function App() {
           <Switch>
             <Route path="/checkout" component={CheckOut} />
             <Route path="/product/:productId" component={ProductDetails} />
-            <Route path="/" component={Home} />
+            <Route path="/" component={() => <Home keyword={keyword} />} />
           </Switch>
         </Router>
       </div>
