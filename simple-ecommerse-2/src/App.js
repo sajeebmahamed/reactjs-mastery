@@ -53,15 +53,9 @@ function App() {
         <Router>
           <Navbar setKeyword={setKeyword}></Navbar>
           <Switch>
-            <Route path="/checkout">
-              <CheckOut />
-            </Route>
-            <Route path="/product/:productId">
-              <ProductDetails />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
+            <Route path="/checkout" component={CheckOut} />
+            <Route path="/product/:productId" component={ProductDetails} />
+            <Route path="/" component={Home} />
           </Switch>
         </Router>
       </div>
