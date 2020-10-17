@@ -16,8 +16,9 @@ app.post('/register', (req, res) => {
     console.log(data);
 })
 
-app.delete('/delete', (req, res) => {
-    res.send('delete')
+app.delete('/delete/:id', (req, res) => {
+    console.log(req.params.id);
+    res.send(req.params.id)
 })
 
 app.listen(port, () => console.log(`listening to the port ${port}`))
