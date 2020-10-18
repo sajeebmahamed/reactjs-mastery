@@ -1,4 +1,5 @@
 const express = require('express')
+const morgan = require('morgan')
 const app = express()
 const port = 4000
 const cors = require('cors')
@@ -6,6 +7,7 @@ const bodyParser = require('body-parser')
 
 app.use(cors())
 app.use(bodyParser.json())
+app.use(morgan('dev'))
 
 app.get('/', (req, res) => {
     res.send('Hello Sajeeb Ahamed')
