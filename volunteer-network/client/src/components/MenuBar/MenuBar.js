@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import { Container } from '@material-ui/core';
+import logo from '../../logos/logo.png'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,13 +28,25 @@ const MenuBar = () => {
                 <AppBar position="fixed" color="default">
                     <Container maxWidth="lg">
                     <Toolbar>
-                        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                            hello
-                    </IconButton>
-                        <Typography variant="h6" className={classes.title}>
-                            News
+                        <img width="15%" src={logo} alt=""/>
+                        <Typography variant="body1" className={classes.title} align="right">
+                            Home
                         </Typography>
-                        <Button color="inherit">Login</Button>
+                        <Typography variant="body1" className={classes.title} align="right">
+                            Duration
+                        </Typography>
+                        <Typography variant="body1" className={classes.title} align="right">
+                            Events
+                        </Typography>
+                        <Typography variant="body1" className={classes.title} align="right">
+                            Blog
+                        </Typography>
+                        <Button variant="contained" color="primary" size="small">
+                            Register
+                        </Button>
+                        <Button variant="contained" color="primary" size="small">
+                            Admin
+                        </Button>
                     </Toolbar>
                     </Container>
                 </AppBar>

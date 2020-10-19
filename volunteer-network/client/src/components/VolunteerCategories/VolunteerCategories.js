@@ -1,4 +1,4 @@
-import { Container, CssBaseline, Grid, makeStyles, Paper } from '@material-ui/core';
+import { Container, CssBaseline, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
 import React from 'react';
 import { categories } from '../../data/categories';
 import Category from './Category';
