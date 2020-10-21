@@ -33,7 +33,7 @@ const MenuBar = () => {
                         <Typography variant="body1" className={classes.title} align="right">
                             Home
                         </Typography>
-                        <Link to="/details">
+                        <Link>
                             <Typography variant="body1" className={classes.title} align="right">
                                 Duration
                         </Typography>

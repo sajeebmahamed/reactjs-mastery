@@ -12,6 +12,7 @@ import {
   Link
 } from "react-router-dom";
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import VolunteerRegister from './components/VolunteerRegister/VolunteerRegister';
 
 export const LoginContext = createContext()
 
@@ -27,9 +28,7 @@ function App() {
             <VolunteerCategories />
           </Route>
           <Route path="/login" component={Login} />
-          <PrivateRoute path="/details">
-            <SearchBar></SearchBar>
-          </PrivateRoute>
+          <Route path="/register" component={VolunteerRegister}/>
         </Switch>
       </Router>
     </LoginContext.Provider>

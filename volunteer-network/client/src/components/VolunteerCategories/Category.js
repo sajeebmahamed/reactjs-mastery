@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { Card, CardActionArea, CardContent, CardHeader, CardMedia, Container, CssBaseline, Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,7 +21,8 @@ const Category = ({ categorie }) => {
     return (
         <React.Fragment>
             <CssBaseline />
-                <Card>
+            <Card>
+                <Link to="/register">
                     <CardActionArea>
                         <CardMedia
                             component="img"
@@ -35,7 +37,8 @@ const Category = ({ categorie }) => {
                             {categorie.name}
                         </Typography>
                     </CardContent>
-                </Card>
+                </Link>
+            </Card>
         </React.Fragment>
     );
 };
