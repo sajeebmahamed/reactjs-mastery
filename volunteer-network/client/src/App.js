@@ -28,7 +28,7 @@ function App() {
             <VolunteerCategories />
           </Route>
           <Route path="/login" component={Login} />
-          <Route path="/register" component={VolunteerRegister}/>
+          <Route path="/register/:eventId" component={VolunteerRegister}/>
         </Switch>
       </Router>
     </LoginContext.Provider>

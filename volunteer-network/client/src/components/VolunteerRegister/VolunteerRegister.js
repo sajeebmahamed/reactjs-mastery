@@ -11,6 +11,8 @@ import {
     KeyboardTimePicker,
     KeyboardDatePicker,
 } from '@material-ui/pickers';
+import { useParams } from 'react-router-dom';
+import { categories } from '../../data/categories';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
 const VolunteerRegister = () => {
     const [value, setValue] = useState({})
     const [selectedDate, setSelectedDate] = useState(new Date().toDateString())
-    console.log(selectedDate);
     const handleDateChange = (date) => {
         setSelectedDate(date.toDateString());
     };
@@ -41,14 +42,14 @@ const VolunteerRegister = () => {
         const newValue = {...value}
         newValue[e.target.name] = e.target.value
         setValue(newValue)
-        console.log(newValue);
     }
     const handleSubmit = () => {
         const finalValue = { ...value }
         finalValue.date = selectedDate
         console.log(finalValue);
     }
-
+    const { eventId} = useParams()
+    const event = categories.find(event => event.id === parseInt(eventId))
     const classes = useStyles();
     
     return (
@@ -79,7 +80,7 @@ const VolunteerRegister = () => {
                                 />
                             </MuiPickersUtilsProvider>
                             <TextField onBlur={handleValue} id="description" name="description" label="Description" />
-                            <TextField onBlur={handleValue} id="event" name="event" label="Event" />
+                            <TextField disabled="true" onBlur={handleValue} defaultValue={event.name} id="event" name="event" label="Event" />
                             <Button onClick={handleSubmit} variant="contained" color="primary">Registration</Button>
                         </form>
                     </CardContent>

@@ -18,11 +18,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Category = ({ categorie }) => {
     const classes = useStyles();
+    console.log(categorie);
     return (
         <React.Fragment>
             <CssBaseline />
             <Card>
-                <Link to="/register">
+                <Link to={`/register/${categorie.id}`}>
                     <CardActionArea>
                         <CardMedia
                             component="img"
