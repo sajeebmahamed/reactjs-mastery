@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import { Container } from '@material-ui/core';
 import logo from '../../logos/logo.png'
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -32,9 +33,11 @@ const MenuBar = () => {
                         <Typography variant="body1" className={classes.title} align="right">
                             Home
                         </Typography>
-                        <Typography variant="body1" className={classes.title} align="right">
-                            Duration
+                        <Link to="/details">
+                            <Typography variant="body1" className={classes.title} align="right">
+                                Duration
                         </Typography>
+                        </Link>
                         <Typography variant="body1" className={classes.title} align="right">
                             Events
                         </Typography>

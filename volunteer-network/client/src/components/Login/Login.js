@@ -34,15 +34,16 @@ const Login = () => {
     let location = useLocation();
 
     let { from } = location.state || { from: { pathname: "/" } };
-    let login = () => {
-        loggedInUser.email.authenticate(() => {
-            history.replace(from);
-        });
-    };
+    // let login = () => {
+    //     loggedInUser.email.authenticate(() => {
+    //         history.replace(from);
+    //     });
+    // };
     const handleLogin = () => {
         firebase.auth().signInWithPopup(provider)
             .then(res => {
                 setLoggedInUser(res.user)
+                history.replace(from);
             })
             .catch(err => {
                 console.log(err.message);

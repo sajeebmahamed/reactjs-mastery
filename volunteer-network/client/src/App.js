@@ -19,9 +19,6 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
   return (
     <LoginContext.Provider value={[loggedInUser, setLoggedInUser]}>
-      {
-        loggedInUser && <p> {loggedInUser.email} </p>
-      }
       <Router>
         <Switch>
           <Route exact path="/">
