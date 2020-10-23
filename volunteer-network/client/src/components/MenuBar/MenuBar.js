@@ -29,7 +29,9 @@ const MenuBar = () => {
                 <AppBar position="fixed" color="default">
                     <Container maxWidth="lg">
                     <Toolbar>
-                        <img width="15%" src={logo} alt=""/>
+                        <Link to="/">
+                            <img width="15%" src={logo} alt="" />
+                        </Link>
                         <Typography variant="body1" className={classes.title} align="right">
                             Home
                         </Typography>

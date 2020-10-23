@@ -11,7 +11,7 @@ import {
     KeyboardTimePicker,
     KeyboardDatePicker,
 } from '@material-ui/pickers';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { categories } from '../../data/categories';
 
 
@@ -43,10 +43,19 @@ const VolunteerRegister = () => {
         newValue[e.target.name] = e.target.value
         setValue(newValue)
     }
+
+    let history = useHistory();
     const handleSubmit = () => {
         const finalValue = { ...value }
         finalValue.date = selectedDate
         console.log(finalValue);
+        history.push({
+            pathname: '/events',
+            state: { value: value, event: event }
+        })
+        
+
+        // window.location = '/events'
     }
     const { eventId} = useParams()
     const event = categories.find(event => event.id === parseInt(eventId))

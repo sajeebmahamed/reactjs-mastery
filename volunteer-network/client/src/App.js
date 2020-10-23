@@ -13,6 +13,7 @@ import {
 } from "react-router-dom";
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import VolunteerRegister from './components/VolunteerRegister/VolunteerRegister';
+import EventTask from './components/EventTask/EventTask';
 
 export const LoginContext = createContext()
 
@@ -21,14 +22,17 @@ function App() {
   return (
     <LoginContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <Router>
+            <MenuBar />
         <Switch>
           <Route exact path="/">
-            <MenuBar />
             <SearchBar />
             <VolunteerCategories />
           </Route>
+          <Route path="/register/:eventId">
+            <VolunteerRegister />
+          </Route>
           <Route path="/login" component={Login} />
-          <Route path="/register/:eventId" component={VolunteerRegister}/>
+          <Route path="/events" component={EventTask} />
         </Switch>
       </Router>
     </LoginContext.Provider>
