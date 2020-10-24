@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
 }))
 const EventTask = (props) => {
     const [registeredEvent, setRegisteredEvent] = useState([])
-    console.log(registeredEvent);
 
     useEffect(() => {
         axios('http://localhost:4000/register')
@@ -30,6 +29,13 @@ const EventTask = (props) => {
                 console.log(err);
             })
     }, [])
+
+    const handleCancel = (id) => {
+        axios.delete('http://localhost:4000/cancel/' + id)
+            .then(res=> {
+                console.log(res);
+            })
+    }
 
     const classes = useStyles()
     return (
@@ -46,7 +52,10 @@ const EventTask = (props) => {
                                         <div>
                                             <Typography variant="h6" align="left" style={{ marginLeft: "1rem" }}> {event.event} </Typography>
                                             <Typography variant="body1" align="left" style={{ marginLeft: "1rem" }}> {event.date} </Typography>
-                                            <Button variant="contained" color="info" size="small" style={{ marginLeft: "15rem" }}> Cancel </Button>
+                                            <Button
+                                                 onClick={() => handleCancel(event._id)}
+                                                variant="contained"
+                                                color="info" size="small" style={{ marginLeft: "15rem" }}> Cancel </Button>
                                         </div>
                                     </div>
                                 </Paper>
