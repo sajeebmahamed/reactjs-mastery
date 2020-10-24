@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -6,6 +6,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     seeMore: {
@@ -13,6 +14,16 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 const VolunteerList = () => {
+    const [events, setEvents] = useState([])
+    useEffect(() => {
+        Axios('http://localhost:4000/register')
+            .then(res => {
+                setEvents(res.data)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }, [])
     const classes = useStyles();
     
     return (
@@ -28,13 +39,17 @@ const VolunteerList = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    <TableRow>
-                        <TableCell align="center">test</TableCell>
-                        <TableCell align="center">test</TableCell>
-                        <TableCell align="center">test</TableCell>
-                        <TableCell align="center">test</TableCell>
-                        <TableCell align="center">teest1</TableCell>
-                    </TableRow>
+                    {
+                        events.map(event => (
+                            <TableRow>
+                                <TableCell align="center"> {event.name} </TableCell>
+                                <TableCell align="center"> {event.email} </TableCell>
+                                <TableCell align="center"> {event.date} </TableCell>
+                                <TableCell align="center"> {event.event} </TableCell>
+                                <TableCell align="center">teest1</TableCell>
+                            </TableRow>
+                        ))
+                    }
                 </TableBody>
             </Table>
             <div className={classes.seeMore}>
