@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { Button, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardActionArea, CardContent, CardHeader, CardMedia, Container, CssBaseline, Typography } from '@material-ui/core';
@@ -13,6 +13,8 @@ import {
 } from '@material-ui/pickers';
 import { useHistory, useParams } from 'react-router-dom';
 import { categories } from '../../data/categories';
+import { LoginContext } from '../../App';
+const axios = require('axios');
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,13 +35,15 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const VolunteerRegister = () => {
+    const [loggedInUser, setLoggedInUser] = useContext(LoginContext)
     const [value, setValue] = useState({})
     const [selectedDate, setSelectedDate] = useState(new Date().toDateString())
+    console.log("value", value);
     const handleDateChange = (date) => {
         setSelectedDate(date.toDateString());
     };
     const handleValue = (e) => {
-        const newValue = {...value}
+        const newValue = { ...value }
         newValue[e.target.name] = e.target.value
         setValue(newValue)
     }
@@ -49,18 +53,23 @@ const VolunteerRegister = () => {
         const finalValue = { ...value }
         finalValue.date = selectedDate
         console.log(finalValue);
-        history.push({
-            pathname: '/events',
-            state: { value: value, event: event }
-        })
-        
+        axios.post('/register', finalValue)
+            .then(res => console.log('success'))
+            .catch(err => console.log(err.message))
+            history.push('/events')
+        // history.push({
+        //     pathname: '/events',
+        //     state: { value: value, event: event }
+        // })
+
 
         // window.location = '/events'
     }
-    const { eventId} = useParams()
+    const { eventId } = useParams()
     const event = categories.find(event => event.id === parseInt(eventId))
-    const classes = useStyles();
     
+    const classes = useStyles();
+
     return (
         <React.Fragment>
             <CssBaseline />
@@ -70,8 +79,8 @@ const VolunteerRegister = () => {
                     <CardContent>
                         <Typography variant="h6" align="center"> Register as a Volunteer </Typography>
                         <form className={classes.fromRoot} noValidate autoComplete="off">
-                            <TextField onBlur={handleValue} id="name" name="name" label="Full Name" />
-                            <TextField onBlur={handleValue} id="email" name="email" label="Email" />
+                            <TextField onChange={handleValue} id="name" name="name" label="Full Name" />
+                            <TextField onChange={handleValue} id="email" name="email" label="Email" />
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                 <KeyboardDatePicker
                                     disableToolbar
@@ -88,8 +97,8 @@ const VolunteerRegister = () => {
                                     }}
                                 />
                             </MuiPickersUtilsProvider>
-                            <TextField onBlur={handleValue} id="description" name="description" label="Description" />
-                            <TextField disabled="true" onBlur={handleValue} defaultValue={event.name} id="event" name="event" label="Event" />
+                            <TextField onChange={handleValue} id="description" name="description" label="Description" />
+                            <TextField  onChange={handleValue} id="event" name="event" label="Event" />
                             <Button onClick={handleSubmit} variant="contained" color="primary">Registration</Button>
                         </form>
                     </CardContent>

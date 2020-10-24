@@ -50,7 +50,9 @@ const MenuBar = () => {
                             Register
                         </Button>
                         <Button variant="contained" color="primary" size="small">
-                            Admin
+                            <Link to="/dashboard">
+                                Admin
+                            </Link>
                         </Button>
                     </Toolbar>
                     </Container>

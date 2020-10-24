@@ -1,6 +1,7 @@
-import { Container, CssBaseline, makeStyles, Paper } from '@material-ui/core';
+import { Button, Container, CssBaseline, makeStyles, Paper, Typography } from '@material-ui/core';
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
+import eventImg from '../../images/childSupport.png'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -11,9 +12,11 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         color: theme.palette.text.secondary,
     },
+    event: {
+        display: 'flex'
+    }
 }))
 const EventTask = (props) => {
-    console.log(props.location.state);
     const classes = useStyles()
     return (
         <React.Fragment>
@@ -22,13 +25,15 @@ const EventTask = (props) => {
                 <Grid container spacing={3}>
                     <Grid item xs={6}>
                         <Paper className={classes.paper}>
-                            <div>
-
+                            <div className={classes.event}>
+                                <img width="20%" src={eventImg} alt=""/>
+                                <div>
+                                    <Typography variant="h6" align="left" style={{marginLeft:"1rem"}}> Humanity More </Typography>
+                                    <Typography variant="body1" align="left" style={{marginLeft:"1rem"}}> 29 sep, 2020 </Typography>
+                                    <Button variant="contained" color="info" size="small" style={{ marginLeft: "15rem" }}> Cancel </Button>
+                                </div>
                             </div>
                         </Paper>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Paper className={classes.paper}>xs=6</Paper>
                     </Grid>
                 </Grid>
             </Container>

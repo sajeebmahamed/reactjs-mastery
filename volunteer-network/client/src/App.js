@@ -14,6 +14,8 @@ import {
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import VolunteerRegister from './components/VolunteerRegister/VolunteerRegister';
 import EventTask from './components/EventTask/EventTask';
+import Dashboard from './components/Admin/Dashboard';
+import AddEvent from './components/Admin/pages/AddEvent';
 
 export const LoginContext = createContext()
 
@@ -22,17 +24,26 @@ function App() {
   return (
     <LoginContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <Router>
-            <MenuBar />
         <Switch>
           <Route exact path="/">
+            <MenuBar />
             <SearchBar />
             <VolunteerCategories />
           </Route>
           <Route path="/register/:eventId">
+            <MenuBar />
             <VolunteerRegister />
           </Route>
-          <Route path="/login" component={Login} />
-          <Route path="/events" component={EventTask} />
+          <Route path="/login">
+             <MenuBar />
+             <Login />
+          </Route>
+          <Route path="/events">
+            <MenuBar />
+            <EventTask />
+          </Route>
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/addEvents" component={AddEvent} />
         </Switch>
       </Router>
     </LoginContext.Provider>
