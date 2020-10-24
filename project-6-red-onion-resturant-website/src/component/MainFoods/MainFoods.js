@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, Container, CssBaseline, Grid, makeStyles, Paper, Tab, Tabs, Typography } from '@material-ui/core';
+import './MainFoods.css'
+import { Link } from 'react-router-dom';
+
 
 const cardStyle = makeStyles((theme) => ({
     root: {
@@ -11,24 +14,41 @@ const cardStyle = makeStyles((theme) => ({
         color: theme.palette.text.secondary,
     },
     media: {
-        height: 0,
-        paddingTop: '100%', // 16:9
+        width: theme.spacing(20),
+        height: theme.spacing(20),
+        margin: '0 auto'
+    },
+    card: {
+        boxShadow: 'none'
     },
 }));
-const MainFoods = ({foods}) => {
+const MainFoods = ({ foods }) => {
     const classes = cardStyle()
-    console.log(foods);
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0);
+    const [selectedFoodType, setSelectedFoodType] = useState("breakfast")
+    const selectedType = foods.filter(food => food.type === selectedFoodType)
+    console.log(selectedType);
 
     const handleChange = (event, newValue) => {
+        if (newValue === 0) {
+            setSelectedFoodType("breakfast")
+        }
+        if (newValue === 1) {
+            setSelectedFoodType("lunch")
+        }
+        if (newValue === 2) {
+            setSelectedFoodType("dinner")
+        }
         setValue(newValue);
     };
     return (
         <React.Fragment>
-            <CssBaseline/>
+            <CssBaseline />
             <Container maxWidth="md">
+                
+
                 <div className={classes.root}>
-                    <Paper style={{padding: '3rem', boxShadow:'none'}} className={classes.root}>
+                    <Paper style={{ padding: '3rem', boxShadow: 'none' }} className={classes.root}>
                         <Tabs
                             value={value}
                             onChange={handleChange}
@@ -36,32 +56,35 @@ const MainFoods = ({foods}) => {
                             textColor="primary"
                             centered
                         >
-                            <Tab label="Item One" />
-                            <Tab label="Item Two" />
-                            <Tab label="Item Three" />
+                            <Tab label="Breakfast" />
+                            <Tab label="Lunch" />
+                            <Tab label="Dinner" />
                         </Tabs>
                     </Paper>
-                    <Grid container spacing={3}>
+                    <Grid container spacing={10}>
+                        
                         {
-                            foods.map(food => (
+                            selectedType.map(food => (
                                 <Grid item xs md={4}>
-                                    <Card className={classes.root}>
-                                        <CardMedia
-                                            className={classes.media}
-                                            image={food.image}
-                                        />
-                                        <CardContent style={{textAlign:'center'}}>
-                                            <Typography variant="body2" color="textSecondary" component="h6">
-                                                {food.name}
-                                            </Typography>
-                                            <Typography variant="body2" color="textSecondary" component="p">
-                                                {food.short_des}
-                                            </Typography>
-                                            <Typography variant="body2" color="textSecondary" component="h6">
-                                                {food.price}
-                                            </Typography>
-                                        </CardContent>
-                                    </Card>
+                                    <Link style={{textDecoration:'none'}} to={`/item/${food.id}`}>
+                                        <Card id="cardItem" className={classes.card}>
+                                            <CardMedia
+                                                className={classes.media}
+                                                image={food.image}
+                                            />
+                                            <CardContent style={{ textAlign: 'center' }}>
+                                                <Typography variant="h6" color="textSecondary" component="p">
+                                                    {food.name}
+                                                </Typography>
+                                                <Typography variant="body2" color="textSecondary" component="p">
+                                                    {food.short_des}
+                                                </Typography>
+                                                <Typography variant="h5" color="textSecondary" component="p">
+                                                    {food.price}
+                                                </Typography>
+                                            </CardContent>
+                                        </Card>
+                                    </Link>
                                 </Grid>
                             ))
                         }

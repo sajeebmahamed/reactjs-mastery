@@ -46,7 +46,7 @@ const Banner = () => {
                         />
                         <Button className={classes.searchBtn} variant="contained" color="secondary">
                             Search
-                    </Button>
+                        </Button>
 
                     </Paper>
                 </div>

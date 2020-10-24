@@ -2,6 +2,7 @@ import React from 'react';
 import { AppBar, Button, Container, CssBaseline, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core';
 import logo from '../../img/logo2.png'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import {Link} from 'react-router-dom'
 
 const headerStyle = makeStyles((theme) => ({
     root: {
@@ -28,9 +29,11 @@ const Header = () => {
             <Container maxWidth="lg">
                 <AppBar className={classes.menu} position="static">
                     <Toolbar>
-                        <Typography>
-                            <img style={{ width: '20%', marginRight: 'auto' }} src={logo} alt="" />
-                        </Typography>
+                        <Link to="/">
+                            <Typography>
+                                <img style={{ width: '20%', marginRight: 'auto' }} src={logo} alt="" />
+                            </Typography>
+                        </Link>
                         <div style={{marginLeft:'auto'}}>
                             <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                                 <ShoppingCartIcon />
