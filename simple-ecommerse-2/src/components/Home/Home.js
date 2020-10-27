@@ -11,7 +11,7 @@ const Home = ({keyword}) => {
         addCartItem,
         removeCartItems,
         clearCart
-    } = useCart([], products)
+    } = useCart(products)
     useEffect(() => {
         const results = data.filter(product => product.title.toLowerCase().includes(keyword.toLowerCase()))
         setProducts(results)

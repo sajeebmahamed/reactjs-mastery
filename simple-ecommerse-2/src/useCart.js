@@ -1,22 +1,28 @@
+import { useContext } from "react"
+import { store } from "./store"
+
 const { useState } = require("react")
 
-const useCart = (init, products) => {
-    const [cartItems, setCartItems] = useState(init)
+const useCart = products => {
+    const { state: {cartItems}, dispatch} = useContext(store)
+
+    const setCartItems = (items) => {
+        dispatch({ type: "SET_CART_ITEMS", payload: items })
+    }
 
     const addCartItem = (id) => {
         const item = products.find(product => product.id === id)
-        setCartItems(items => {
-            const itemIndex = items.findIndex(currentItem => currentItem.id === id)
+            const itemIndex = cartItems.findIndex(currentItem => currentItem.id === id)
             if (itemIndex === -1) {
-                return [
-                    ...items,
+                setCartItems([
+                    ...cartItems,
                     {
                         ...item,
                         quantity: 1
                     }
-                ];
+                ]);
             } else {
-                return items.map(currentItem =>
+                setCartItems(cartItems.map(currentItem =>
                     currentItem.id === id
                         ? {
                             ...item,
@@ -24,9 +30,8 @@ const useCart = (init, products) => {
                         }
                         : currentItem
 
-                );
+                ));
             }
-        })
         // setCartItems([...cartItems, item])
     }
     const removeCartItems = (id) => {
@@ -39,7 +44,12 @@ const useCart = (init, products) => {
             setCartItems([])
         }
     }
+
+    const total = cartItems.reduce((sum, cur) => sum + cur.price * cur.quantity, 0)
+
+
     return {
+        total,
         cartItems,
         addCartItem,
         removeCartItems,

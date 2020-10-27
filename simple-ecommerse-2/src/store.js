@@ -20,8 +20,8 @@ const reducer = (state, action) => {
     }
 }
 
-const StateProvider = ({children}) => {
-    const {state, dispatch} = useReducer(reducer, init)
+export const StateProvider = ({children}) => {
+    const [state, dispatch] = useReducer(reducer, init)
     return <Provider value= {{ state, dispatch }}> {children} </Provider>
 }
 
