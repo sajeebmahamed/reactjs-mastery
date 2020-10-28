@@ -13,18 +13,17 @@ function App() {
   const toggleDark = () => {
     setDark(isDark => !isDark);
   };
-  const [keyword, setKeyword] = useState("")
 
   return (
     <StateProvider>
       <ThemeContext.Provider value={{ dark: dark, toggle: toggleDark }}>
         <div>
           <Router>
-            <Navbar setKeyword={setKeyword}></Navbar>
+            <Navbar></Navbar>
             <Switch>
               <Route path="/checkout" component={CheckOut} />
               <Route path="/product/:productId" component={ProductDetails} />
-              <Route path="/" component={() => <Home keyword={keyword} />} />
+              <Route path="/" component={Home} />
             </Switch>
           </Router>
         </div>

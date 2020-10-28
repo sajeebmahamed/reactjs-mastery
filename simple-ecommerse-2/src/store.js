@@ -1,28 +1,41 @@
-import React, {createContext} from 'react'
+import React, { createContext } from 'react'
 import { useReducer } from 'react'
 
 const init = {
-    cartItems: []
+    products: [],
+    cartItems: [],
+    keyword: ""
 }
 
 const store = createContext(init)
 const { Provider } = store
 
 const reducer = (state, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case 'SET_CART_ITEMS':
             return {
                 ...state,
                 cartItems: action.payload
             }
-            default:
-                return state
+            case 'SET_PRODUCTS':
+                return {
+                    ...state,
+                    products: action.payload
+                }
+            case 'SET_KEYWORD': {
+                return {
+                    ...state,
+                    keyword: action.payload
+                }
+            }
+        default:
+            return state
     }
 }
 
-export const StateProvider = ({children}) => {
+export const StateProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, init)
-    return <Provider value= {{ state, dispatch }}> {children} </Provider>
+    return <Provider value={{ state, dispatch }}> {children} </Provider>
 }
 
 export {

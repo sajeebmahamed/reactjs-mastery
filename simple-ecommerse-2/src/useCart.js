@@ -3,8 +3,8 @@ import { store } from "./store"
 
 const { useState } = require("react")
 
-const useCart = products => {
-    const { state: {cartItems}, dispatch} = useContext(store)
+const useCart = () => {
+    const { state: {products, cartItems}, dispatch} = useContext(store)
 
     const setCartItems = (items) => {
         dispatch({ type: "SET_CART_ITEMS", payload: items })
