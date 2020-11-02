@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { store } from '../../store';
 import ThemeContext from '../Theme/ThemeContext';
 
 const Navbar = () => {
     const { dark, toggle } = useContext(ThemeContext);
-    const {dispatch} = useContext(store)
+    const dispatch = useDispatch()
     const handleChange = (e) => {
         dispatch({ type: 'SET_KEYWORD', payload: e.target.value })
     }

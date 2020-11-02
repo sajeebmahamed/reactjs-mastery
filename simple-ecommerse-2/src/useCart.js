@@ -1,10 +1,7 @@
-import { useContext } from "react"
-import { store } from "./store"
-
-const { useState } = require("react")
-
+import { useDispatch, useSelector } from "react-redux"
 const useCart = () => {
-    const { state: {products, cartItems}, dispatch} = useContext(store)
+    const {products, cartItems} = useSelector(state => state)
+    const dispatch = useDispatch()
 
     const setCartItems = (items) => {
         dispatch({ type: "SET_CART_ITEMS", payload: items })
