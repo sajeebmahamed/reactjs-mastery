@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CheckOut from './components/CheckOut/CheckOut';
 import Home from './components/Home/Home';
 import { StateProvider } from './store';
+import Cart from './components/Cart/Cart';
 
 function App() {
   const [dark, setDark] = useState(false);
@@ -25,6 +26,7 @@ function App() {
               <Route path="/product/:productId" component={ProductDetails} />
               <Route path="/" component={Home} />
             </Switch>
+            <Cart />
           </Router>
         </div>
       </ThemeContext.Provider>
