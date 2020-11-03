@@ -4,9 +4,9 @@ import Navbar from './components/Navbar/Navbar';
 import ThemeContext from './components/Theme/ThemeContext'
 // import ProductDetails from './components/ProductDetails/ProductDetails'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { StateProvider } from './store/store';
 // import CheckOut from './components/CheckOut/CheckOut';
 // import Home from './components/Home/Home';
-import { StateProvider } from './store';
 // import Cart from './components/Cart/Cart';
 
 const Home = lazy(() => import('./components/Home/Home'))

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import data from '../../data';
+import { setProducts } from '../../store/action';
 import useCart from '../../useCart';
 import ThemeContext from '../Theme/ThemeContext';
 import ListProduct from './ListProduct';
@@ -12,7 +13,7 @@ const ProductList = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         const results = data.filter(product => product.title.toLowerCase().includes(keyword.toLowerCase()))
-        dispatch({ type: "SET_PRODUCTS", payload: results })
+        dispatch(setProducts(results))
     }, [dispatch, keyword])
     return (
         <div className={`product-list ${dark ? 'dark' : 'light'}`}>

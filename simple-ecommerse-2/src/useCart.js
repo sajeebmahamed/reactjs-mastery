@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from "react-redux"
+import { setCartItems as cartItem } from "./store/action"
 const useCart = () => {
     const {products, cartItems} = useSelector(state => state)
     const dispatch = useDispatch()
 
     const setCartItems = (items) => {
-        dispatch({ type: "SET_CART_ITEMS", payload: items })
+        dispatch(cartItem(items))
     }
 
     const addCartItem = (id) => {
